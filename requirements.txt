@@ -1,2 +1,4 @@
 Django==6.0.4
 pre-commit==4.5.1
+python-dotenv==1.2.2
+psycopg2==2.9.11

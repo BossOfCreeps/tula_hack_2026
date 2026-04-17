@@ -2,3 +2,4 @@
 .gigaide/
 db.sqlite3
 *.pyc
+.env
