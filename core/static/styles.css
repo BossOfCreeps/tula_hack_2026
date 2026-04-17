@@ -181,6 +181,13 @@ body {
     letter-spacing: -0.3px;
 }
 
+.player-age {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 14px 20px 6px;
+    letter-spacing: -0.3px;
+}
+
 .stats {
     background: rgba(0, 0, 0, 0.4);
     margin: 12px 20px 12px;
@@ -440,6 +447,7 @@ body {
     cursor: pointer;
     transition: 0.2s;
     font-size: 0.8rem;
+    text-decoration: none;
 }
 
 .add-btn:hover {
