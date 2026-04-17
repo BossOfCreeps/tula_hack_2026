@@ -1,6 +1,5 @@
-{% load static %}
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -25,6 +24,13 @@
 </header>
 
 <main class="container">
+    <!-- ТЕКСТОВЫЙ БЛОК С ОПИСАНИЕМ ЗАДАЧИ (добавлен в начало) -->
+    <div class="task-description">
+        <h3>
+            Описание задач
+        </h3>
+        <p>{{object.description|safe}}</p>
+    </div>
     <!-- Блок: слева карточки игроков с увеличенными аватарками, кнопкой удалить -->
     <!-- справа четырёхугольник силы -->
     <div class="two-columns">
@@ -35,8 +41,8 @@
                 <div class="team-card">
                     <div class="card-header">
                         <div class="player-avatar-area">
-                            <img class="avatar-large" alt="{{ user.username }}" src="{% if user.image %}{{ user.image.url }}{% else %}/static/default.png{% endif %}"/>
-                            <span class="player-position">{{ user.username }}</span>
+                            <img class="avatar-large" alt="{{ user.get_full_name }}" src="{% if user.image %}{{ user.image.url }}{% else %}/static/default.png{% endif %}"/>
+                            <span class="player-position">{{ user.get_full_name }}</span>
                         </div>
                         <span class="player-rating">{{ user.total_disc_score }}</span>
                     </div>
@@ -122,51 +128,40 @@
     <!-- ТАБЛИЦА с увеличенными аватарками и кнопками "добавить" -->
     <div class="table-section">
         <div class="table-title">
-            📋 ТАБЛИЦА ПОЛЬЗОВАТЕЛЕЙ / РЕЙТИНГ (аватарки)
+            Таблица пользователей
         </div>
         <div class="table-wrapper">
             <table class="stats-table">
                 <thead>
                 <tr>
                     <th>Пользователь</th>
-                    <th>Команда</th>
-                    <th>Игры</th>
-                    <th>Очки</th>
-                    <th>Сила четырёхуг.</th>
+                    <th>Роль</th>
+                    <th>Доминирование</th>
+                    <th>Влияние</th>
+                    <th>Стабильность</th>
+                    <th>Соответствие</th>
+                    <th>Итог</th>
                     <th>Действие</th>
                 </tr>
                 </thead>
                 <tbody>
+                {% for user in all_users %}
                 <tr>
-                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">⭐</div><span>Alex_10</span></div></td>
-                    <td>Real Madrid</td><td>34</td><td><strong>78</strong></td><td><span class="rating-badge">94.2</span></td>
+                    <td>
+                        <div class="user-avatar-medium">
+                            <img src="{% if user.image %}{{ user.image.url }}{% else %}/static/default.png{% endif %}" class="user-avatar-medium"/>
+                            <span>{{user.get_full_name}}</span>
+                        </div>
+                    </td>
+                    <td>{{user.role}}</td>
+                    <td>{{user.disc_d}}</td>
+                    <td>{{user.disc_i}}</td>
+                    <td>{{user.disc_s}}</td>
+                    <td>{{user.disc_c}}</td>
+                    <td><span class="rating-badge">{{user.total_disc_score}}</span></td>
                     <td><button class="add-btn" data-user="Alex_10">➕ Добавить</button></td>
                 </tr>
-                <tr>
-                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">🔥</div><span>MCFC_King</span></div></td>
-                    <td>Man City</td><td>32</td><td><strong>72</strong></td><td><span class="rating-badge">93.7</span></td>
-                    <td><button class="add-btn" data-user="MCFC_King">➕ Добавить</button></td>
-                </tr>
-                <tr>
-                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">🐺</div><span>BayernFan</span></div></td>
-                    <td>Bayern</td><td>31</td><td><strong>67</strong></td><td><span class="rating-badge">91.5</span></td>
-                    <td><button class="add-btn" data-user="BayernFan">➕ Добавить</button></td>
-                </tr>
-                <tr>
-                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">🇫🇷</div><span>PSG_Master</span></div></td>
-                    <td>Paris SG</td><td>33</td><td><strong>65</strong></td><td><span class="rating-badge">90.8</span></td>
-                    <td><button class="add-btn" data-user="PSG_Master">➕ Добавить</button></td>
-                </tr>
-                <tr>
-                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">🔴</div><span>LFC_Warrior</span></div></td>
-                    <td>Liverpool</td><td>30</td><td><strong>60</strong></td><td><span class="rating-badge">90.1</span></td>
-                    <td><button class="add-btn" data-user="LFC_Warrior">➕ Добавить</button></td>
-                </tr>
-                <tr>
-                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">💎</div><span>Blaugrana</span></div></td>
-                    <td>Barcelona</td><td>32</td><td><strong>57</strong></td><td><span class="rating-badge">89.3</span></td>
-                    <td><button class="add-btn" data-user="Blaugrana">➕ Добавить</button></td>
-                </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -174,10 +169,6 @@
 </main>
 
 <footer>
-    <div class="container">
-        <p>© 2026</p>
-        <p style="margin-top: 8px;">⚡ Кнопки только визуально, логика не реализована. Четырёхугольник выполнен в духе "силового радара" ⚡</p>
-    </div>
 </footer>
 </body>
 </html>
