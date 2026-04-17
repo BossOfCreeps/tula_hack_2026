@@ -1,0 +1,4 @@
+.idea/
+.gigaide/
+db.sqlite3
+*.pyc
