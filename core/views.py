@@ -1,5 +1,11 @@
-from django.views.generic.base import TemplateView
+from django.views.generic import DetailView
+
+from core.models import Team
+from users.models import User
 
 
-class IndexView(TemplateView):
-    template_name = "index.html"
+class TeamDetailView(DetailView):
+    queryset = Team.objects.prefetch_related("users").all()
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs) | {"all_users": User.objects.all()}

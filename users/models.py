@@ -5,14 +5,16 @@ from django.db import models
 class User(AbstractUser):
     role = models.TextField(blank=True, null=True, help_text="User's role in the team")
 
-    disc_d = models.IntegerField("Dominance", null=True, help_text="Score for Dominance dimension (0-100)")
-    disc_i = models.IntegerField("Influence", help_text="Score for Influence dimension (0-100)", default=0)
-    disc_s = models.IntegerField("Steadiness", help_text="Score for Steadiness dimension (0-100)", default=0)
-    disc_c = models.IntegerField("Compliance", help_text="Score for Compliance dimension (0-100)", default=0)
+    disc_d = models.IntegerField("Доминирование", null=True, help_text="Score for Dominance dimension (0-100)")
+    disc_i = models.IntegerField("Влияние", help_text="Score for Influence dimension (0-100)", default=0)
+    disc_s = models.IntegerField("Стабильность", help_text="Score for Steadiness dimension (0-100)", default=0)
+    disc_c = models.IntegerField("Соответствие", help_text="Score for Compliance dimension (0-100)", default=0)
 
     motivational_profile = models.TextField(blank=True, null=True, help_text="User's motivational profile description")
 
     age = models.TextField(blank=True, null=True, help_text="Age or generation (e.g., Gen Z, Millennial, etc.)")
+
+    image = models.ImageField(null=True, blank=True)
 
     class Meta:
         verbose_name = "Пользователь"
