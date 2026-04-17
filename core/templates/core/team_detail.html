@@ -1,35 +1,9 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Карточки</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-</head>
-<body>
-
-<header class="header">
-    <div class="container">
-        <div class="logo">
-            <h1>ULTIMATE TEAM</h1>
-        </div>
-        <div class="nav">
-            <a href="#">Главная</a>
-            <a href="#">Игроки</a>
-            <a href="#">Таблица лиги</a>
-            <a href="#">Академия</a>
-        </div>
-    </div>
-</header>
-
-<main class="container">
+{% extends "base.html" %}
+{% block main %}
     <!-- ТЕКСТОВЫЙ БЛОК С ОПИСАНИЕМ ЗАДАЧИ (добавлен в начало) -->
     <div class="task-description">
-        <h3>
-            Описание задач
-        </h3>
-        <p>{{object.description|safe}}</p>
+        <h3>Описание задач</h3>
+        <p>{{ object.description|safe }}</p>
     </div>
     <!-- Блок: слева карточки игроков с увеличенными аватарками, кнопкой удалить -->
     <!-- справа четырёхугольник силы -->
@@ -38,43 +12,59 @@
         <div class="players-section">
             <div class="players-grid">
                 {% for user in object.users.all %}
-                <div class="team-card">
-                    <div class="card-header">
-                        <div class="player-avatar-area">
-                            <img class="avatar-large" alt="{{ user.get_full_name }}" src="{% if user.image %}{{ user.image.url }}{% else %}/static/default.png{% endif %}"/>
-                            <span class="player-position">{{ user.role|default:"-" }}</span>
+                    <div class="team-card">
+                        <div class="card-header">
+                            <div class="player-avatar-area">
+                                <img class="avatar-large"
+                                     alt="{{ user.get_full_name }}"
+                                     src="{% if user.image %}{{ user.image.url }}{% else %}/static/default.png{% endif %}" />
+                                <span class="player-position">{{ user.role|default:"-" }}</span>
+                            </div>
+                            <span class="player-rating">{{ user.total_disc_score }}</span>
                         </div>
-                        <span class="player-rating">{{ user.total_disc_score }}</span>
+                        <div class="player-name">{{ user.get_full_name }}</div>
+                        <div class="player-age">{{ user.age|default:"-" }}</div>
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-value">{{ user.disc_d }}</div>
+                                <div class="stat-label">Доминирование</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">{{ user.disc_i }}</div>
+                                <div class="stat-label">Влияние</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">{{ user.disc_s }}</div>
+                                <div class="stat-label">Стабильность</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">{{ user.disc_c }}</div>
+                                <div class="stat-label">Соответствие</div>
+                            </div>
+                        </div>
+                        <a href="{% url 'team_user-remove' object.id user.id %}"
+                           class="delete-btn">🗑️ Удалить</a>
                     </div>
-                    <div class="player-name">{{ user.get_full_name }}</div>
-                    <div class="player-age">{{ user.age|default:"-" }}</div>
-                    <div class="stats">
-                        <div class="stat"><div class="stat-value">{{ user.disc_d }}</div><div class="stat-label">Доминирование</div></div>
-                        <div class="stat"><div class="stat-value">{{ user.disc_i }}</div><div class="stat-label">Влияние</div></div>
-                        <div class="stat"><div class="stat-value">{{ user.disc_s }}</div><div class="stat-label">Стабильность</div></div>
-                        <div class="stat"><div class="stat-value">{{ user.disc_c }}</div><div class="stat-label">Соответствие</div></div>
-                    </div>
-                    <a href="{% url 'team_user-remove' object.id user.id %}" class="delete-btn">🗑️ Удалить</a>
-                </div>
                 {% endfor %}
             </div>
         </div>
-
         <!-- ПРАВАЯ КОЛОНКА: ЧЕТЫРЁХУГОЛЬНИК СИЛЫ -->
         <div class="power-side">
             <div class="power-hex-container">
                 <div class="power-title">ЧЕТЫРЁХУГОЛЬНИК СИЛЫ</div>
                 <!-- Радар SVG 4 угла -->
                 <div class="radar-quad">
-                    <svg class="radar-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="radar-svg"
+                         viewBox="0 0 260 260"
+                         xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur in="SourceAlpha" stdDeviation="3"></feGaussianBlur>
-                                <feMerge>
-                                    <feMergeNode in="offsetblur"></feMergeNode>
-                                    <feMergeNode in="SourceGraphic"></feMergeNode>
-                                </feMerge>
-                            </filter>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="3"></feGaussianBlur>
+                        <feMerge>
+                        <feMergeNode in="offsetblur"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                        </feMerge>
+                        </filter>
                         </defs>
                         <!-- Фоновые оси (крест) и сетка -->
                         <line x1="130" y1="10" x2="130" y2="250" class="axis-line"></line>
@@ -84,98 +74,94 @@
                         <!-- внутренние линии (шкала 50%) -->
                         <polygon points="130,75 175,130 130,185 85,130" fill="none" stroke="#ffcd7e40" stroke-width="1" stroke-dasharray="2 3"></polygon>
                         <polygon points="130,47.5 202.5,130 130,212.5 57.5,130" fill="none" stroke="#ffcd7e20" stroke-width="1"></polygon>
-
                         <!-- Заливка рейтинга -->
-                        <polygon points="{{object.calc_polygon.disc_d}} {{object.calc_polygon.disc_i}} {{object.calc_polygon.disc_s}} {{object.calc_polygon.disc_c}}" class="polygon-fill"></polygon>
-
+                        <polygon points="{{ object.calc_polygon.disc_d }} {{ object.calc_polygon.disc_i }} {{ object.calc_polygon.disc_s }} {{ object.calc_polygon.disc_c }}" class="polygon-fill"></polygon>
                         <!-- Подписи углов -->
                         <text x="130" y="10" class="stat-label-radial">Доминирование</text>
                         <text x="210" y="120" class="stat-label-radial">Влияние</text>
                         <text x="130" y="250" class="stat-label-radial">Стабильность</text>
                         <text x="60" y="120" class="stat-label-radial">Соответствие</text>
-
                         <!-- Цифры рядом с вершинами -->
-                        <text x="130" y="40" class="stat-value-text">{{object.disc_d}}</text>
-                        <text x="220" y="140" class="stat-value-text">{{object.disc_i}}</text>
-                        <text x="130" y="220" class="stat-value-text">{{object.disc_s}}</text>
-                        <text x="40" y="140" class="stat-value-text">{{object.disc_c}}</text>
-
+                        <text x="130" y="40" class="stat-value-text">{{ object.disc_d }}</text>
+                        <text x="220" y="140" class="stat-value-text">{{ object.disc_i }}</text>
+                        <text x="130" y="220" class="stat-value-text">{{ object.disc_s }}</text>
+                        <text x="40" y="140" class="stat-value-text">{{ object.disc_c }}</text>
                         <!-- Центральный кружок -->
                         <circle cx="{{ object.find_center.x }}" cy="{{ object.find_center.y }}" r="8" fill="#ffb347" stroke="#0a1424" stroke-width="2"></circle>
                     </svg>
                 </div>
                 <div class="legend-stats">
-                    <div class="legend-item"><div class="legend-color"></div>
-                        <span>Доминирование ({{object.users_disc.disc_d}} / {{object.disc_d}})</span>
+                    <div class="legend-item">
+                        <div class="legend-color"></div>
+                        <span>Доминирование ({{ object.users_disc.disc_d }} / {{ object.disc_d }})</span>
                     </div>
-                    <div class="legend-item"><div class="legend-color"></div>
-                        <span>Влияние ({{object.users_disc.disc_i}} / {{object.disc_i}})</span>
+                    <div class="legend-item">
+                        <div class="legend-color"></div>
+                        <span>Влияние ({{ object.users_disc.disc_i }} / {{ object.disc_i }})</span>
                     </div>
-                    <div class="legend-item"><div class="legend-color"></div>
-                        <span>Стабильность ({{object.users_disc.disc_s}} / {{object.disc_s}})</span>
+                    <div class="legend-item">
+                        <div class="legend-color"></div>
+                        <span>Стабильность ({{ object.users_disc.disc_s }} / {{ object.disc_s }})</span>
                     </div>
-                    <div class="legend-item"><div class="legend-color"></div>
-                        <span>Соответствие ({{object.users_disc.disc_c}} / {{object.disc_c}})</span>
+                    <div class="legend-item">
+                        <div class="legend-color"></div>
+                        <span>Соответствие ({{ object.users_disc.disc_c }} / {{ object.disc_c }})</span>
                     </div>
                 </div>
                 <div class="total-power-radial">
                     <span>Итог:</span>
-                    <div class="total-number-radial">{{object.dics_match}}</div>
+                    <div class="total-number-radial">{{ object.dics_match }}</div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- ТАБЛИЦА с увеличенными аватарками и кнопками "добавить" -->
     <div class="table-section">
-        <div class="table-title">
-            Таблица пользователей
-        </div>
+        <div class="table-title">Все пользователи</div>
         <div class="table-wrapper">
             <table class="stats-table">
                 <thead>
-                <tr>
-                    <th>Пользователь</th>
-                    <th>Роль</th>
-                    <th>Возраст</th>
-                    <th>Доминирование</th>
-                    <th>Влияние</th>
-                    <th>Стабильность</th>
-                    <th>Соответствие</th>
-                    <th>Итог</th>
-                    <th>Действие</th>
-                </tr>
+                    <tr>
+                        <th>Пользователь</th>
+                        <th>Роль</th>
+                        <th>Возраст</th>
+                        <th>Доминирование</th>
+                        <th>Влияние</th>
+                        <th>Стабильность</th>
+                        <th>Соответствие</th>
+                        <th>Итог</th>
+                        <th>Действие</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {% for user in all_users %}
-                <tr>
-                    <td>
-                        <div class="user-avatar-medium">
-                            <img src="{% if user.image %}{{ user.image.url }}{% else %}/static/default.png{% endif %}" class="user-avatar-medium" alt="{{ user.get_full_name }}"/>
-                            <span>{{user.get_full_name}}</span>
-                        </div>
-                    </td>
-                    <td>{{user.role}}</td>
-                    <td>{{user.age}}</td>
-                    <td>{{user.disc_d}}</td>
-                    <td>{{user.disc_i}}</td>
-                    <td>{{user.disc_s}}</td>
-                    <td>{{user.disc_c}}</td>
-                    <td><span class="rating-badge">{{user.total_disc_score}}</span></td>
-                    <td>
-                        {% if user not in object.users.all %}
-                        <a class="add-btn" href="{% url 'team_user-add' object.id user.id %}">➕ Добавить</a>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
+                    {% for user in all_users %}
+                        <tr>
+                            <td>
+                                <div class="user-avatar-medium">
+                                    <img src="{% if user.image %}{{ user.image.url }}{% else %}/static/default.png{% endif %}"
+                                         class="user-avatar-medium"
+                                         alt="{{ user.get_full_name }}" />
+                                    <span>{{ user.get_full_name }}</span>
+                                </div>
+                            </td>
+                            <td>{{ user.role }}</td>
+                            <td>{{ user.age }}</td>
+                            <td>{{ user.disc_d }}</td>
+                            <td>{{ user.disc_i }}</td>
+                            <td>{{ user.disc_s }}</td>
+                            <td>{{ user.disc_c }}</td>
+                            <td>
+                                <span class="rating-badge">{{ user.total_disc_score }}</span>
+                            </td>
+                            <td>
+                                {% if user not in object.users.all %}
+                                    <a class="add-btn" href="{% url 'team_user-add' object.id user.id %}">➕ Добавить</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
-</main>
-
-<footer>
-</footer>
-</body>
-</html>
+{% endblock main %}

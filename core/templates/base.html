@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description">
+        <meta name="keywords">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, user-scalable=yes">
+        <title>Карточки</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <header class="header">
+            <div class="container">
+                <div class="logo">
+                    <h1>ULTIMATE TEAM</h1>
+                </div>
+                <div class="nav">
+                    <a href="#">Главная</a>
+                    <a href="#">Игроки</a>
+                    <a href="#">Таблица лиги</a>
+                    <a href="#">Академия</a>
+                </div>
+            </div>
+        </header>
+        <main class="container">
+            {% block main %}
+            {% endblock main %}
+        </main>
+        <footer>
+            {% block footer %}
+            {% endblock footer %}
+        </footer>
+    </body>
+</html>
