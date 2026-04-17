@@ -1,0 +1,481 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Poppins', 'Roboto', system-ui, -apple-system, 'BlinkMacSystemFont', sans-serif;
+    background: linear-gradient(145deg, #0b1a2e 0%, #0c1a2a 100%);
+    color: #f0f3f8;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ========= ШАПКА ========= */
+.header {
+    background: rgba(10, 25, 47, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px gold);
+}
+
+.logo h1 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #FFD966, #FFB347);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.nav {
+    display: flex;
+    gap: 28px;
+}
+
+.nav a {
+    color: #e2e8f0;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+    font-size: 1rem;
+}
+
+.nav a:hover {
+    color: #f5b042;
+    text-shadow: 0 0 5px rgba(245, 176, 66, 0.5);
+}
+
+/* два столбца */
+.two-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 50px 0 40px;
+}
+
+/* ЛЕВАЯ КОЛОНКА: карточки игроков */
+.players-section {
+    flex: 2;
+    min-width: 260px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    border-left: 6px solid #f5b042;
+    padding-left: 18px;
+    letter-spacing: -0.3px;
+    background: linear-gradient(90deg, rgba(245,176,66,0.2), transparent);
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 28px;
+}
+
+.team-card {
+    background: linear-gradient(145deg, #1e2a3a, #0f1722);
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.25s ease, box-shadow 0.3s;
+    border: 1px solid rgba(255, 209, 102, 0.25);
+    backdrop-filter: blur(2px);
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 28px 40px -12px black;
+    border-color: rgba(255, 200, 80, 0.6);
+}
+
+.card-header {
+    background: #0f212f;
+    padding: 16px 20px 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f5b04250;
+}
+
+.player-avatar-area {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatar-large {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #ffb347, #ff7e05);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #0a0f1c;
+    box-shadow: 0 0 0 3px #FFD966, 0 0 0 6px #1e2a3a;
+    background-size: cover;
+    background-position: center;
+    transition: 0.2s;
+}
+
+.player-position {
+    font-weight: 800;
+    background: #f5b042;
+    color: #0a0f1c;
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.player-rating {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #FFD966;
+    text-shadow: 0 0 4px #ffb347;
+    line-height: 1;
+}
+
+.player-name {
+    font-size: 1.55rem;
+    font-weight: 700;
+    margin: 14px 20px 6px;
+    letter-spacing: -0.3px;
+}
+
+.player-club {
+    margin: 0 20px 12px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stats {
+    background: rgba(0, 0, 0, 0.4);
+    margin: 12px 20px 12px;
+    border-radius: 20px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.stat {
+    text-align: center;
+    flex: 1;
+    min-width: 50px;
+}
+
+.stat-value {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #FFD966;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.delete-btn {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 0 20px 20px 20px;
+    background: rgba(220, 60, 50, 0.2);
+    border: 1px solid rgba(220, 60, 50, 0.6);
+    color: #ff8a7a;
+    padding: 8px 0;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.delete-btn:hover {
+    background: rgba(220, 60, 50, 0.6);
+    color: white;
+    border-color: #ff5a4a;
+}
+
+/* ===== СИЛОВОЙ ЧЕТЫРЁХУГОЛЬНИК В СТИЛЕ DOTA 2 (ПЯТИУГОЛЬНИК, НО 4 УГЛА) ===== */
+.power-side {
+    flex: 1.2;
+    min-width: 320px;
+}
+
+.power-hex-container {
+    background: radial-gradient(circle at 30% 20%, #111d2c, #050a12);
+    border-radius: 48px;
+    padding: 28px 20px 32px;
+    box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,200,0.1);
+    border: 1px solid rgba(210, 180, 80, 0.6);
+    position: relative;
+}
+
+.power-title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 32px;
+    background: linear-gradient(135deg, #FFE6B0, #FFB347);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(0,0,0,0.5);
+}
+
+/* Четырехугольник в стиле "радар" Dota 2 */
+.radar-quad {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 0 auto 30px;
+}
+
+.radar-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: drop-shadow(0 0 6px rgba(255, 200, 80, 0.4));
+}
+
+.polygon-bg {
+    fill: rgba(20, 35, 65, 0.5);
+    stroke: #ffcd7e;
+    stroke-width: 2;
+    stroke-dasharray: 4 3;
+}
+
+.polygon-fill {
+    fill: rgba(255, 180, 70, 0.35);
+    stroke: #ffb347;
+    stroke-width: 3;
+    filter: url(#glow);
+    transition: all 0.2s;
+}
+
+.axis-line {
+    stroke: #ffcd7e60;
+    stroke-width: 1.2;
+    stroke-dasharray: 3 3;
+}
+
+.stat-label-radial {
+    fill: #FFE0A3;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 0 0 4px black;
+    dominant-baseline: middle;
+    text-anchor: middle;
+}
+
+.stat-value-text {
+    fill: #FFE484;
+    font-size: 13px;
+    font-weight: 800;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.legend-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 20px 0 18px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    background: #0f1a28a0;
+    padding: 4px 12px;
+    border-radius: 30px;
+}
+
+.legend-color {
+    width: 14px;
+    height: 14px;
+    background: #ffb347;
+    border-radius: 2px;
+}
+
+.total-power-radial {
+    text-align: center;
+    background: #00000050;
+    border-radius: 60px;
+    padding: 12px;
+    margin-top: 12px;
+    backdrop-filter: blur(4px);
+}
+
+.total-power-radial span {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.total-number-radial {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #FFDD99;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+/* ТАБЛИЦА с аватарками (увеличенные в строке) */
+.table-section {
+    margin: 40px 0 70px;
+    background: rgba(10, 22, 35, 0.7);
+    border-radius: 32px;
+    padding: 8px 4px 16px 4px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+.table-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin: 20px 20px 20px 28px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 24px;
+    margin: 0 16px 16px;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    background: #0e1824;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.stats-table th {
+    background: #1f3142;
+    color: #FFDD99;
+    padding: 16px 12px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.stats-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #2a3a4e;
+    vertical-align: middle;
+}
+
+/* Увеличенная мини-аватарка в таблице (чтобы сочеталось с карточками) */
+.user-avatar-medium {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(145deg, #ffb347, #e07c1f);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-right: 14px;
+    box-shadow: 0 0 0 2px #ffd966;
+}
+
+.team-info {
+    display: flex;
+    align-items: center;
+}
+
+.add-btn {
+    background: rgba(80, 180, 80, 0.2);
+    border: 1px solid #6fbf4c;
+    color: #b3ff9e;
+    padding: 6px 18px;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 0.8rem;
+}
+
+.add-btn:hover {
+    background: #6fbf4c;
+    color: #0a1a2a;
+    border-color: white;
+}
+
+.rating-badge {
+    background: #f5b04230;
+    font-weight: 800;
+    color: #ffcd7e;
+    padding: 4px 10px;
+    border-radius: 40px;
+    display: inline-block;
+}
+
+footer {
+    text-align: center;
+    padding: 28px 0;
+    border-top: 1px solid rgba(255,215,0,0.2);
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #9aaec0;
+}
+
+@media (max-width: 880px) {
+    .two-columns {
+        flex-direction: column;
+    }
+    .radar-quad {
+        width: 220px;
+        height: 220px;
+    }
+}

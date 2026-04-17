@@ -1,0 +1,241 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Карточки</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <h1>ULTIMATE TEAM</h1>
+        </div>
+        <div class="nav">
+            <a href="#">Главная</a>
+            <a href="#">Игроки</a>
+            <a href="#">Таблица лиги</a>
+            <a href="#">Академия</a>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <!-- Блок: слева карточки игроков с увеличенными аватарками, кнопкой удалить -->
+    <!-- справа четырёхугольник силы -->
+    <div class="two-columns">
+        <!-- ЛЕВАЯ ЧАСТЬ: карточки игроков с аватарками -->
+        <div class="players-section">
+            <div class="section-title">
+                Участники команды
+            </div>
+            <div class="players-grid">
+                <!-- Карточка 1: Винисиус - большая аватарка -->
+                <div class="team-card">
+                    <div class="card-header">
+                        <div class="player-avatar-area">
+                            <div class="avatar-large" style="background: linear-gradient(135deg,#2c5f2d,#1e3a1f); font-size: 2rem;">🇧🇷</div>
+                            <span class="player-position">LW</span>
+                        </div>
+                        <span class="player-rating">94</span>
+                    </div>
+                    <div class="player-name">Vinicius Jr.</div>
+                    <div class="player-club"><span>⚪ Real Madrid</span></div>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-value">96</div><div class="stat-label">Пас</div></div>
+                        <div class="stat"><div class="stat-value">97</div><div class="stat-label">Дриблинг</div></div>
+                        <div class="stat"><div class="stat-value">95</div><div class="stat-label">Скорость</div></div>
+                        <div class="stat"><div class="stat-value">82</div><div class="stat-label">Защита</div></div>
+                    </div>
+                    <button class="delete-btn" data-player="Vinicius">🗑️ Удалить карточку</button>
+                </div>
+                <!-- Карточка 2: Холанд -->
+                <div class="team-card">
+                    <div class="card-header">
+                        <div class="player-avatar-area">
+                            <div class="avatar-large" style="background: linear-gradient(135deg,#1e3c72,#0f2b4f);">🇳🇴</div>
+                            <span class="player-position">ST</span>
+                        </div>
+                        <span class="player-rating">96</span>
+                    </div>
+                    <div class="player-name">Erling Haaland</div>
+                    <div class="player-club"><span>🏙️ Man City</span></div>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-value">93</div><div class="stat-label">Удар</div></div>
+                        <div class="stat"><div class="stat-value">89</div><div class="stat-label">Физ.</div></div>
+                        <div class="stat"><div class="stat-value">91</div><div class="stat-label">Скорость</div></div>
+                        <div class="stat"><div class="stat-value">75</div><div class="stat-label">Пас</div></div>
+                    </div>
+                    <button class="delete-btn" data-player="Haaland">🗑️ Удалить карточку</button>
+                </div>
+                <!-- Карточка 3: Де Брюйне -->
+                <div class="team-card">
+                    <div class="card-header">
+                        <div class="player-avatar-area">
+                            <div class="avatar-large" style="background: linear-gradient(135deg,#ad3430,#5e1b1b);">🇧🇪</div>
+                            <span class="player-position">CM</span>
+                        </div>
+                        <span class="player-rating">92</span>
+                    </div>
+                    <div class="player-name">Kevin De Bruyne</div>
+                    <div class="player-club"><span>🌟 Man City</span></div>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-value">98</div><div class="stat-label">Пас</div></div>
+                        <div class="stat"><div class="stat-value">88</div><div class="stat-label">Дриблинг</div></div>
+                        <div class="stat"><div class="stat-value">86</div><div class="stat-label">Удар</div></div>
+                        <div class="stat"><div class="stat-value">78</div><div class="stat-label">Защита</div></div>
+                    </div>
+                    <button class="delete-btn" data-player="De Bruyne">🗑️ Удалить карточку</button>
+                </div>
+                <!-- Карточка 4: ван Дейк -->
+                <div class="team-card">
+                    <div class="card-header">
+                        <div class="player-avatar-area">
+                            <div class="avatar-large" style="background: linear-gradient(135deg,#c49a6c,#8b5a2b);">🇳🇱</div>
+                            <span class="player-position">CB</span>
+                        </div>
+                        <span class="player-rating">90</span>
+                    </div>
+                    <div class="player-name">Virgil van Dijk</div>
+                    <div class="player-club"><span>🔴 Liverpool</span></div>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-value">92</div><div class="stat-label">Защита</div></div>
+                        <div class="stat"><div class="stat-value">89</div><div class="stat-label">Физ.</div></div>
+                        <div class="stat"><div class="stat-value">81</div><div class="stat-label">Скорость</div></div>
+                        <div class="stat"><div class="stat-value">74</div><div class="stat-label">Пас</div></div>
+                    </div>
+                    <button class="delete-btn" data-player="van Dijk">🗑️ Удалить карточку</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ПРАВАЯ КОЛОНКА: ЧЕТЫРЁХУГОЛЬНИК СИЛЫ -->
+        <div class="power-side">
+            <div class="power-hex-container">
+                <div class="power-title">ЧЕТЫРЁХУГОЛЬНИК СИЛЫ</div>
+                <!-- Радар SVG 4 угла (Атака, Защита, Полузащита, Физика) -->
+                <div class="radar-quad">
+                    <svg class="radar-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                                <feMerge>
+                                    <feMergeNode in="offsetblur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <!-- Фоновые оси (крест) и сетка -->
+                        <line x1="130" y1="10" x2="130" y2="250" class="axis-line" />
+                        <line x1="10" y1="130" x2="250" y2="130" class="axis-line" />
+                        <!-- Ромб/рамка фонового четырехугольника (max уровень 100) -->
+                        <polygon points="130,20 220,130 130,240 40,130" class="polygon-bg" />
+                        <!-- внутренние линии (шкала 50%) -->
+                        <polygon points="130,75 175,130 130,185 85,130" fill="none" stroke="#ffcd7e40" stroke-width="1" stroke-dasharray="2 3"/>
+                        <polygon points="130,47.5 202.5,130 130,212.5 57.5,130" fill="none" stroke="#ffcd7e20" stroke-width="1"/>
+
+                        <!-- ЗАЛИВКА рейтинга: значения (Атака 94%, Защита 88%, Полузащита 91%, Физика 86%)
+                             координаты: вершины радара: вверх (Атака), право (Защита?), по заданию "Атака, Защита, Полузащита, Физика"
+                             Расположим: верх = Атака (94), право = Защита (88), низ = Полузащита (91), лево = Физика (86) -->
+                        <!-- Перевод процентов: расстояние от центра = (значение/100) * радиус 90px (центр 130,130)
+                             Радиус до вершин ~110px -->
+                        <!-- Расчёт: Атака (94%) -> 130, 130-110*0.94 = 130, 26.6 ; Защита (88%): 130+110*0.88=226.8, 130 ;
+                             Полузащита (91%): 130, 130+110*0.91=230.1 ; Физика (86%): 130-110*0.86=35.4, 130 -->
+                        <polygon points="130,76.6 226.8,130 130,230.1 35.4,130" class="polygon-fill" />
+
+                        <!-- Подписи углов -->
+                        <text x="130" y="16" class="stat-label-radial" fill="#FFBC6E">АТАКА</text>
+                        <text x="245" y="134" class="stat-label-radial">ЗАЩИТА</text>
+                        <text x="130" y="252" class="stat-label-radial">ПОЛУЗАЩИТА</text>
+                        <text x="12" y="134" class="stat-label-radial">ФИЗИКА</text>
+
+                        <!-- Цифры рядом с вершинами -->
+                        <text x="130" y="76.6" class="stat-value-text" fill="#FFD966">94</text>
+                        <text x="218" y="126" class="stat-value-text">88</text>
+                        <text x="130" y="222" class="stat-value-text">91</text>
+                        <text x="30" y="126" class="stat-value-text">86</text>
+
+                        <!-- Центральный кружок -->
+                        <circle cx="130" cy="130" r="8" fill="#ffb347" stroke="#0a1424" stroke-width="2" />
+                    </svg>
+                </div>
+                <div class="legend-stats">
+                    <div class="legend-item"><div class="legend-color"></div><span>Атака 94</span></div>
+                    <div class="legend-item"><div class="legend-color"></div><span>Защита 88</span></div>
+                    <div class="legend-item"><div class="legend-color"></div><span>Полузащита 91</span></div>
+                    <div class="legend-item"><div class="legend-color"></div><span>Физика 86</span></div>
+                </div>
+                <div class="total-power-radial">
+                    <span>⚡ ИНТЕГРАЛЬНЫЙ ПОКАЗАТЕЛЬ СИЛЫ ⚡</span>
+                    <div class="total-number-radial">91.4</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ТАБЛИЦА с увеличенными аватарками и кнопками "добавить" -->
+    <div class="table-section">
+        <div class="table-title">
+            📋 ТАБЛИЦА ПОЛЬЗОВАТЕЛЕЙ / РЕЙТИНГ (аватарки)
+        </div>
+        <div class="table-wrapper">
+            <table class="stats-table">
+                <thead>
+                <tr>
+                    <th>Пользователь</th>
+                    <th>Команда</th>
+                    <th>Игры</th>
+                    <th>Очки</th>
+                    <th>Сила четырёхуг.</th>
+                    <th>Действие</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">⭐</div><span>Alex_10</span></div></td>
+                    <td>Real Madrid</td><td>34</td><td><strong>78</strong></td><td><span class="rating-badge">94.2</span></td>
+                    <td><button class="add-btn" data-user="Alex_10">➕ Добавить</button></td>
+                </tr>
+                <tr>
+                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">🔥</div><span>MCFC_King</span></div></td>
+                    <td>Man City</td><td>32</td><td><strong>72</strong></td><td><span class="rating-badge">93.7</span></td>
+                    <td><button class="add-btn" data-user="MCFC_King">➕ Добавить</button></td>
+                </tr>
+                <tr>
+                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">🐺</div><span>BayernFan</span></div></td>
+                    <td>Bayern</td><td>31</td><td><strong>67</strong></td><td><span class="rating-badge">91.5</span></td>
+                    <td><button class="add-btn" data-user="BayernFan">➕ Добавить</button></td>
+                </tr>
+                <tr>
+                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">🇫🇷</div><span>PSG_Master</span></div></td>
+                    <td>Paris SG</td><td>33</td><td><strong>65</strong></td><td><span class="rating-badge">90.8</span></td>
+                    <td><button class="add-btn" data-user="PSG_Master">➕ Добавить</button></td>
+                </tr>
+                <tr>
+                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">🔴</div><span>LFC_Warrior</span></div></td>
+                    <td>Liverpool</td><td>30</td><td><strong>60</strong></td><td><span class="rating-badge">90.1</span></td>
+                    <td><button class="add-btn" data-user="LFC_Warrior">➕ Добавить</button></td>
+                </tr>
+                <tr>
+                    <td><div style="display: flex; align-items: center;"><div class="user-avatar-medium">💎</div><span>Blaugrana</span></div></td>
+                    <td>Barcelona</td><td>32</td><td><strong>57</strong></td><td><span class="rating-badge">89.3</span></td>
+                    <td><button class="add-btn" data-user="Blaugrana">➕ Добавить</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2026</p>
+        <p style="margin-top: 8px;">⚡ Кнопки только визуально, логика не реализована. Четырёхугольник выполнен в духе "силового радара" ⚡</p>
+    </div>
+</footer>
+</body>
+</html>
