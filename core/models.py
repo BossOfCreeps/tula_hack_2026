@@ -37,3 +37,47 @@ class Team(models.Model):
         data = [(self.users_disc[key] / value) if self.users_disc[key] < value else 1 for key, value in desired.items()]
 
         return round(sum(data) / 4 * 100, 2)
+
+    @cached_property
+    def calc_polygon(self):
+        """
+        Перевод процентов: расстояние от центра = (значение/100) * радиус 90px (центр 130,130). Радиус до вершин ~110px
+        Расчёт: (94%) -> 130, 130-110*0.94 = 130, 26.6
+        """
+
+        def _calc(k: str, znak):
+            a = self.users_disc[k] / getattr(self, k)
+            if a > 1:
+                a = 1
+
+            if znak == "-":
+                return 130 - 110 * a
+            return 130 + 110 * a
+
+        return {
+            "disc_d": f"130,{_calc('disc_d', '-')}",
+            "disc_i": f"{_calc('disc_i', '+')},130",
+            "disc_s": f"130,{_calc('disc_s', '+')}",
+            "disc_c": f"{_calc('disc_c', '-')},130",
+        }
+
+    @cached_property
+    def find_center(self):
+        """
+
+        Параметры:
+        vertices: list of tuples [(x1,y1), (x2,y2), (x3,y3), (x4,y4)]
+                  Вершины четырёхугольника в порядке обхода
+
+        Возвращает:
+        dict: словарь с разными типами центров
+        """
+
+        vertices = []
+        for k, v in self.calc_polygon.items():
+            x, y = v.split(",")
+            vertices.append((float(x), float(y)))
+
+        sum_x = sum(v[0] for v in vertices)
+        sum_y = sum(v[1] for v in vertices)
+        return {"x": int(sum_x / 4), "y": int(sum_y / 4)}

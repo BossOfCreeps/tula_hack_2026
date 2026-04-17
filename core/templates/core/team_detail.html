@@ -40,7 +40,7 @@
                         </div>
                         <span class="player-rating">{{ user.total_disc_score }}</span>
                     </div>
-                    <div class="player-name">{{ user.role }}</div>
+                    <div class="player-name">{{ user.role|default:"-" }}</div>
                     <div class="stats">
                         <div class="stat"><div class="stat-value">{{ user.disc_d }}</div><div class="stat-label">Доминирование</div></div>
                         <div class="stat"><div class="stat-value">{{ user.disc_i }}</div><div class="stat-label">Влияние</div></div>
@@ -78,29 +78,23 @@
                         <polygon points="130,75 175,130 130,185 85,130" fill="none" stroke="#ffcd7e40" stroke-width="1" stroke-dasharray="2 3"/>
                         <polygon points="130,47.5 202.5,130 130,212.5 57.5,130" fill="none" stroke="#ffcd7e20" stroke-width="1"/>
 
-                        <!-- ЗАЛИВКА рейтинга: значения (Атака 94%, Защита 88%, Полузащита 91%, Физика 86%)
-                             координаты: вершины радара: вверх (Атака), право (Защита?), по заданию "Атака, Защита, Полузащита, Физика"
-                             Расположим: верх = Атака (94), право = Защита (88), низ = Полузащита (91), лево = Физика (86) -->
-                        <!-- Перевод процентов: расстояние от центра = (значение/100) * радиус 90px (центр 130,130)
-                             Радиус до вершин ~110px -->
-                        <!-- Расчёт: Атака (94%) -> 130, 130-110*0.94 = 130, 26.6 ; Защита (88%): 130+110*0.88=226.8, 130 ;
-                             Полузащита (91%): 130, 130+110*0.91=230.1 ; Физика (86%): 130-110*0.86=35.4, 130 -->
-                        <polygon points="130,76.6 226.8,130 130,230.1 35.4,130" class="polygon-fill" />
+                        <!-- Заливка рейтинга -->
+                        <polygon points="{{object.calc_polygon.disc_d}} {{object.calc_polygon.disc_i}} {{object.calc_polygon.disc_s}} {{object.calc_polygon.disc_c}}" class="polygon-fill" />
 
                         <!-- Подписи углов -->
                         <text x="130" y="10" class="stat-label-radial">Доминирование</text>
-                        <text x="230" y="140" class="stat-label-radial">Влияние</text>
+                        <text x="210" y="120" class="stat-label-radial">Влияние</text>
                         <text x="130" y="250" class="stat-label-radial">Стабильность</text>
-                        <text x="60" y="140" class="stat-label-radial">Соответствие</text>
+                        <text x="60" y="120" class="stat-label-radial">Соответствие</text>
 
                         <!-- Цифры рядом с вершинами -->
-                        <text x="130" y="76.6" class="stat-value-text" fill="#FFD966">94</text>
-                        <text x="218" y="126" class="stat-value-text">88</text>
-                        <text x="130" y="222" class="stat-value-text">91</text>
-                        <text x="30" y="126" class="stat-value-text">86</text>
+                        <text x="130" y="40" class="stat-value-text">{{object.disc_d}}</text>
+                        <text x="220" y="140" class="stat-value-text">{{object.disc_i}}</text>
+                        <text x="130" y="220" class="stat-value-text">{{object.disc_s}}</text>
+                        <text x="40" y="140" class="stat-value-text">{{object.disc_c}}</text>
 
                         <!-- Центральный кружок -->
-                        <circle cx="130" cy="130" r="8" fill="#ffb347" stroke="#0a1424" stroke-width="2" />
+                        <circle cx="{{ object.find_center.x }}" cy="{{ object.find_center.y }}" r="8" fill="#ffb347" stroke="#0a1424" stroke-width="2" />
                     </svg>
                 </div>
                 <div class="legend-stats">

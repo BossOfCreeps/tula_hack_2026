@@ -305,6 +305,7 @@ body {
     text-shadow: 0 0 4px black;
     dominant-baseline: middle;
     text-anchor: middle;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .stat-value-text {
@@ -313,6 +314,7 @@ body {
     font-weight: 800;
     text-anchor: middle;
     dominant-baseline: middle;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .legend-stats {
