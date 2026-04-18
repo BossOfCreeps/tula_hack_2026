@@ -12,12 +12,12 @@ from utils.prompts import MAIN_PROMPT
 
 class TeamListView(ListView):
     def get_queryset(self):
-        return Team.objects.prefetch_related("users").filter(created_by=self.request.user)
+        return Team.objects.prefetch_related("users__role").filter(created_by=self.request.user)
 
 
 class TeamDetailView(DetailView):
     def get_queryset(self):
-        return Team.objects.prefetch_related("users").filter(created_by=self.request.user)
+        return Team.objects.prefetch_related("users__role").filter(created_by=self.request.user)
 
     def get_context_data(self, **kwargs):
         obj: Team = self.get_object()
@@ -41,13 +41,12 @@ class TeamDetailView(DetailView):
 class TeamCreateView(CreateView):
     model = Team
     fields = [
+        "description",
         "disc_d",
         "disc_i",
         "disc_s",
         "disc_c",
-        #
-        "description",
-        #
+        "roles",
         "motype_in",
         "motype_pr",
         "motype_pa",

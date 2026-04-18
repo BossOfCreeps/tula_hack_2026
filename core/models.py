@@ -3,7 +3,7 @@ from functools import cached_property
 from django.db import models
 from django.urls import reverse
 
-from users.models import User
+from users.models import User, Role
 
 
 class Team(models.Model):
@@ -23,6 +23,8 @@ class Team(models.Model):
     motype_pa = models.IntegerField("Патриотический")
     motype_ho = models.IntegerField("Хозяйский")
     motype_lu = models.IntegerField("Люмпенизированный")
+
+    roles = models.ManyToManyField(Role, verbose_name="Роли")
 
     class Meta:
         verbose_name = "Команда"

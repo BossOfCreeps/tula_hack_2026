@@ -4,8 +4,19 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
+class Role(models.Model):
+    name = models.TextField()
+
+    class Meta:
+        verbose_name = "Роль"
+        verbose_name_plural = "Роли"
+
+    def __str__(self):
+        return self.name
+
+
 class User(AbstractUser):
-    role = models.TextField(blank=True, null=True, help_text="User's role in the team")
+    role = models.ForeignKey(Role, models.CASCADE, blank=True, null=True, help_text="User's role in the team")
 
     disc_d = models.IntegerField(
         "Доминирование", null=True, help_text="Score for Dominance dimension (0-100)", default=0
@@ -81,5 +92,16 @@ class User(AbstractUser):
         ]
 
     @property
-    def total_disc_score(self):
-        return sum(self.disc_profile.values())
+    def total_params(self):
+        r = {"disc_v": 0, "disc_k": "", "motype_v": 0, "motype_k": ""}
+        for k, v in self.disc_profile.items():
+            if (v or 0) > r["disc_v"]:
+                r["disc_k"] = k
+                r["disc_v"] = v
+
+        for d in self.motypes:
+            if (d["percent"] or 0) > r["motype_v"]:
+                r["motype_v"] = d["percent"]
+                r["motype_k"] = d["name"]
+
+        return f"{r['disc_k'][:1].upper()} | {r['motype_k'][:2].upper()}"
