@@ -1,4 +1,15 @@
 {% extends "base.html" %}
+{% block head %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script type="text/javascript"
+            charset="utf8"
+            src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript"
+            charset="utf8"
+            src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+{% endblock head %}
 {% block main %}
     <!-- ТЕКСТОВЫЙ БЛОК С ОПИСАНИЕМ ЗАДАЧИ (добавлен в начало) -->
     <div class="task-description">
@@ -119,7 +130,7 @@
     <div class="table-section">
         <div class="table-title">Все пользователи</div>
         <div class="table-wrapper">
-            <table class="stats-table">
+            <table class="stats-table" id="myTable">
                 <thead>
                     <tr>
                         <th>Пользователь</th>
@@ -165,3 +176,14 @@
         </div>
     </div>
 {% endblock main %}
+{% block scripts %}
+    <script>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.13.4/i18n/ru.json'
+            }
+        });
+    });
+    </script>
+{% endblock scripts %}

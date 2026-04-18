@@ -389,7 +389,6 @@ body {
 
 .table-wrapper {
     overflow-x: auto;
-    border-radius: 24px;
     margin: 0 16px 16px;
 }
 
@@ -398,7 +397,6 @@ body {
     border-collapse: collapse;
     font-size: 0.9rem;
     background: #0e1824;
-    border-radius: 24px;
     overflow: hidden;
 }
 
@@ -468,6 +466,11 @@ body {
 .user-avatar-medium {
     display: flex;
     align-items: center;
+}
+
+table.dataTable {
+    padding-top: 20px;
+    margin-bottom: 20px;
 }
 
 /* Текстовый блок с описанием задачи */
