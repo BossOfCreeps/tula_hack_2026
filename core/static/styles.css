@@ -2408,3 +2408,144 @@ table.dataTable {
     color: var(--color-lime);
     margin-right: 6px;
 }
+
+/* DISC сетка */
+.team-disc-grid {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+    padding: 12px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.disc-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 4px;
+    border-radius: 12px;
+    background: #F5F5F7;
+    transition: var(--transition-default);
+}
+
+.disc-item:hover {
+    transform: translateY(-2px);
+}
+
+.disc-label {
+    font-weight: 800;
+    font-size: 0.9rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--color-white);
+}
+
+.disc-value {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--color-black);
+}
+
+.disc-d .disc-label { color: var(--color-lime); background: rgba(167, 252, 0, 0.15); }
+.disc-i .disc-label { color: var(--color-electric-blue); background: rgba(0, 191, 255, 0.15); }
+.disc-s .disc-label { color: var(--color-magenta); background: rgba(255, 52, 149, 0.15); }
+.disc-c .disc-label { color: var(--color-blue); background: rgba(0, 0, 255, 0.15); }
+
+/* Блок процентов */
+.team-percentages {
+    margin-top: 12px;
+    padding: 12px 0 4px;
+}
+
+.percentages-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 12px;
+}
+
+.percentages-title i {
+    font-size: 0.7rem;
+}
+
+.percentages-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.percent-item {
+    width: 100%;
+}
+
+.percent-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    margin-bottom: 4px;
+}
+
+.percent-label {
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+}
+
+.percent-number {
+    font-weight: 700;
+    color: var(--color-black);
+}
+
+.percent-bar-container {
+    background: #F5F5F7;
+    border-radius: 20px;
+    height: 6px;
+    overflow: hidden;
+}
+
+.percent-bar {
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.3s ease;
+}
+
+.percentages-total {
+    margin-top: 12px;
+    padding-top: 8px;
+    text-align: right;
+    font-size: 0.7rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.percentages-total strong {
+    color: var(--color-magenta);
+    font-size: 0.8rem;
+    margin-left: 6px;
+}
+
+/* Адаптив */
+@media (max-width: 480px) {
+    .team-disc-grid {
+        flex-wrap: wrap;
+    }
+
+    .disc-item {
+        flex: calc(50% - 4px);
+    }
+
+    .percent-header {
+        font-size: 0.65rem;
+    }
+}

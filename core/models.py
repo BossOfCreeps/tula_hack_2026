@@ -29,6 +29,45 @@ class Team(models.Model):
         verbose_name_plural = "Команды"
 
     @cached_property
+    def motypes(self):
+        return [
+            {"name": "Инструментальный", "percent": self.motype_in, "color": "#2E7D32"},
+            {"name": "Профессиональный", "percent": self.motype_pr, "color": "#1976D2"},
+            {"name": "Патриотический", "percent": self.motype_pa, "color": "#C62828"},
+            {"name": "Хозяйский", "percent": self.motype_ho, "color": "#F57C00"},
+            {"name": "Люмпенизированный", "percent": self.motype_lu, "color": "#616161"},
+        ]
+
+    def motypes_circle(self):
+        return [
+            {
+                "start_percent": 0,
+                "percent": self.motype_in,
+                "color": "#2E7D32",
+            },
+            {
+                "start_percent": self.motype_in,
+                "percent": self.motype_pr + self.motype_in,
+                "color": "#1976D2",
+            },
+            {
+                "start_percent": self.motype_pr + self.motype_in,
+                "percent": self.motype_pr + self.motype_in + self.motype_pa,
+                "color": "#C62828",
+            },
+            {
+                "start_percent": self.motype_pr + self.motype_in + self.motype_pa,
+                "percent": self.motype_pr + self.motype_in + self.motype_pa + self.motype_ho,
+                "color": "#F57C00",
+            },
+            {
+                "start_percent": self.motype_pr + self.motype_in + self.motype_pa + self.motype_ho,
+                "percent": 100,
+                "color": "#616161",
+            },
+        ]
+
+    @cached_property
     def users_disc(self) -> dict[str, int]:
         result = {"disc_d": 0, "disc_i": 0, "disc_s": 0, "disc_c": 0}
         for user in self.users.all():
