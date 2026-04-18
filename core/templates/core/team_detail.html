@@ -264,11 +264,15 @@
                         <th>Пользователь</th>
                         <th>Роль</th>
                         <th>Возраст</th>
-                        <th>Доминирование</th>
-                        <th>Влияние</th>
-                        <th>Стабильность</th>
-                        <th>Соответствие</th>
-                        <th>Итог</th>
+                        <th>Инст.</th>
+                        <th>Проф.</th>
+                        <th>Патр.</th>
+                        <th>Хоз.</th>
+                        <th>Люмп.</th>
+                        <th>Дом.</th>
+                        <th>Влия.</th>
+                        <th>Стаб.</th>
+                        <th>Соот.</th>
                         <th>Действие</th>
                     </tr>
                 </thead>
@@ -296,13 +300,15 @@
                             </td>
                             <td>{{ user.role }}</td>
                             <td>{{ user.age }}</td>
+                            <td>{{ user.motype_in }}</td>
+                            <td>{{ user.motype_pr }}</td>
+                            <td>{{ user.motype_pa }}</td>
+                            <td>{{ user.motype_ho }}</td>
+                            <td>{{ user.motype_lu }}</td>
                             <td>{{ user.disc_d }}</td>
                             <td>{{ user.disc_i }}</td>
                             <td>{{ user.disc_s }}</td>
                             <td>{{ user.disc_c }}</td>
-                            <td>
-                                <span class="rating-badge">{{ user.total_disc_score }}</span>
-                            </td>
                             <td>
                                 {% if user not in object.users.all %}
                                     <a class="add-btn" href="{% url 'team_user-add' object.id user.id %}">

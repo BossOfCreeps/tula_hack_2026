@@ -4,7 +4,7 @@ from django.views.generic import DetailView, View, ListView, CreateView, Templat
 
 from core.models import Team, AIReviews
 from users.models import User
-from utils.disk import check_disk_compatibility
+from utils.disc import check_disk_compatibility
 from utils.gpt import call_ai
 from utils.prompts import MAIN_PROMPT
 
