@@ -29,7 +29,7 @@
                             <span class="player-rating">{{ user.total_disc_score }}</span>
                         </div>
                         <div class="player-name">{{ user.get_full_name }}</div>
-                        <div class="player-age">{{ user.age|default:"-" }}</div>
+                        <div class="player-age">Возраст: {{ user.age|default:"-" }}</div>
                         <div class="stats">
                             <div class="stat">
                                 <div class="stat-value">{{ user.disc_d }}</div>
@@ -48,6 +48,24 @@
                                 <div class="stat-label">Соответствие</div>
                             </div>
                         </div>
+                        <!-- Мини-круговая диаграмма для пользователя -->
+                        <div class="user-pie-mini">
+                            <div class="pie-mini-container">
+                                <div class="pie-mini-chart"
+                                     style="background: conic-gradient( {% for role in user.motypes_circle %} {{ role.color }} {{ role.start_percent }}% {{ role.percent }}%{% if not forloop.last %}, {% endif %} {% endfor %} )">
+                                </div>
+                                <div class="pie-mini-inner"></div>
+                            </div>
+                            <div class="pie-mini-legend">
+                                {% for role in user.motypes %}
+                                    <div class="pie-mini-legend-item">
+                                        <span class="pie-mini-legend-color" style="background: {{ role.color }};"></span>
+                                        <span class="pie-mini-legend-label">{{ role.name }}</span>
+                                        <span class="pie-mini-legend-percent">{{ role.percent }}%</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
                         <a href="{% url 'team_user-remove' object.id user.id %}"
                            class="delete-btn">
                             <i class="fa-solid fa-trash"></i> Удалить
@@ -59,7 +77,7 @@
         <!-- ПРАВАЯ КОЛОНКА: ЧЕТЫРЁХУГОЛЬНИК СИЛЫ -->
         <div class="power-side">
             <div class="power-hex-container">
-                <div class="power-title">Силы команды</div>
+                <p class="power-title">Силы команды</p>
                 <div class="radar-quad">
                     <svg class="radar-svg"
                          viewBox="0 0 260 260"
@@ -115,18 +133,13 @@
             </div>
             <!-- Круговая диаграмма (5 параметров) -->
             <div class="team-pie-detail">
-                <div class="power-title">
-                    <span>Распределение ролей</span>
-                </div>
+                <p class="power-title">Распределение ролей</p>
                 <div class="pie-content">
                     <div class="pie-container-detail">
                         <div class="pie-chart-detail"
                              style="background: conic-gradient( {% for role in object.motypes_circle %} {{ role.color }} {{ role.start_percent }}% {{ role.percent }}%{% if not forloop.last %}, {% endif %} {% endfor %} )">
                         </div>
-                        <div class="pie-inner-detail">
-                            <span class="pie-total-detail">100</span>
-                            <span class="pie-label-detail">%</span>
-                        </div>
+                        <div class="pie-inner-detail"></div>
                     </div>
                     <div class="pie-legend-detail">
                         {% for role in object.motypes %}

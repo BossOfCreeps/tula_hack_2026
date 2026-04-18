@@ -305,7 +305,7 @@ a {
 .stat-label {
     font-size: 0.6rem;
     opacity: 0.5;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     color: var(--color-black);
 }
 
@@ -2590,129 +2590,387 @@ table.dataTable {
     }
 }
 
-        .team-pie-detail {
-            background: var(--color-white);
-            border-radius: var(--border-radius);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            transition: var(--transition-default);
-            margin-top: 20px;
-        }
+.team-pie-detail {
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: var(--transition-default);
+    margin-top: 20px;
+}
 
-        .team-pie-detail:hover {
-            border-color: var(--color-magenta);
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
-        }
+.team-pie-detail:hover {
+    border-color: var(--color-magenta);
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+}
 
-        .pie-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: var(--color-black);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 12px;
-        }
+.pie-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--color-black);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
+}
 
-        .pie-title i {
-            color: var(--color-magenta);
-        }
+.pie-title i {
+    color: var(--color-magenta);
+}
 
-        .pie-content {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+.pie-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
-        .pie-container-detail {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            flex-shrink: 0;
-        }
+.pie-container-detail {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    flex-shrink: 0;
+}
 
-        .pie-chart-detail {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-        }
+.pie-chart-detail {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
 
-        .team-pie-detail:hover .pie-chart-detail {
-            transform: scale(1.05);
-        }
+.team-pie-detail:hover .pie-chart-detail {
+    transform: scale(1.05);
+}
 
-        .pie-inner-detail {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
+.pie-inner-detail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
 
-        .pie-total-detail {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--color-black);
-            line-height: 1;
-        }
+.pie-total-detail {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--color-black);
+    line-height: 1;
+}
 
-        .pie-label-detail {
-            font-size: 10px;
-            color: rgba(0, 0, 0, 0.5);
-            font-weight: 600;
-        }
+.pie-label-detail {
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+}
 
-        .pie-legend-detail {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+.pie-legend-detail {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
-        .pie-legend-item-detail {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.8rem;
-        }
+.pie-legend-item-detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+}
 
-        .pie-legend-color-detail {
-            width: 12px;
-            height: 12px;
-            border-radius: 3px;
-            flex-shrink: 0;
-        }
+.pie-legend-color-detail {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
 
-        .pie-legend-label-detail {
-            flex: 1;
-            color: rgba(0, 0, 0, 0.7);
-            font-weight: 500;
-        }
+.pie-legend-label-detail {
+    flex: 1;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 500;
+}
 
-        .pie-legend-percent-detail {
-            font-weight: 700;
-            color: var(--color-black);
-            flex-shrink: 0;
-        }
+.pie-legend-percent-detail {
+    font-weight: 700;
+    color: var(--color-black);
+    flex-shrink: 0;
+}
 
-        @media (max-width: 480px) {
-            .pie-content {
-                flex-direction: column;
-            }
+@media (max-width: 480px) {
+    .pie-content {
+        flex-direction: column;
+    }
 
-            .pie-legend-detail {
-                width: 100%;
-            }
-        }
+    .pie-legend-detail {
+        width: 100%;
+    }
+}
+
+
+/* Стили для мини-круговой диаграммы в карточке пользователя */
+.user-pie-mini {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 20px;
+    padding: 8px 12px;
+    background: #F5F5F7;
+    border-radius: 16px;
+    transition: var(--transition-default);
+}
+
+.user-pie-mini:hover {
+    background: rgba(255, 52, 149, 0.08);
+}
+
+.pie-mini-container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.pie-mini-chart {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.user-pie-mini:hover .pie-mini-chart {
+    transform: scale(1.05);
+}
+
+.pie-mini-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px;
+    height: 28px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.pie-mini-total {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--color-black);
+    line-height: 1;
+}
+
+.pie-mini-label {
+    font-size: 6px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+}
+
+.pie-mini-legend {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pie-mini-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+}
+
+.pie-mini-legend-color {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.pie-mini-legend-label {
+    flex: 1;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pie-mini-legend-percent {
+    font-weight: 700;
+    color: var(--color-black);
+    flex-shrink: 0;
+    font-size: 0.6rem;
+}
+
+/* Адаптив для мини-пирога */
+@media (max-width: 480px) {
+    .user-pie-mini {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .pie-mini-legend {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+    }
+
+    .pie-mini-legend-item {
+        font-size: 0.55rem;
+    }
+}
+
+/* Стили для круговой диаграммы в detail (увеличим немного) */
+.team-pie-detail {
+    margin-top: 20px;
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: var(--transition-default);
+}
+
+.team-pie-detail:hover {
+    border-color: var(--color-magenta);
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+}
+
+.power-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--color-black);
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.power-title i {
+    color: var(--color-magenta);
+}
+
+.pie-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pie-container-detail {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+}
+
+.pie-chart-detail {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.team-pie-detail:hover .pie-chart-detail {
+    transform: scale(1.05);
+}
+
+.pie-inner-detail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65px;
+    height: 65px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pie-legend-detail {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 150px;
+}
+
+.pie-legend-item-detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+}
+
+.pie-legend-color-detail {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.pie-legend-label-detail {
+    flex: 1;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 500;
+}
+
+.pie-legend-percent-detail {
+    font-weight: 700;
+    color: var(--color-black);
+    flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+    .pie-content {
+        flex-direction: column;
+    }
+
+    .pie-legend-detail {
+        width: 100%;
+    }
+}
+.pie-mini-legend-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-magenta);
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.pie-mini-legend-title i {
+    font-size: 0.6rem;
+}
+
+.pie-mini-legend-title span {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
