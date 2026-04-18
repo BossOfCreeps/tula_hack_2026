@@ -5,16 +5,13 @@
           href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <script type="text/javascript"
             charset="utf8"
-            src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript"
-            charset="utf8"
             src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 {% endblock head %}
 {% block main %}
     <!-- ТЕКСТОВЫЙ БЛОК С ОПИСАНИЕМ ЗАДАЧИ (добавлен в начало) -->
     <div class="task-description">
-        <h3>Описание задач</h3>
-        <p>{{ object.description|safe }}</p>
+        <h3>Описание задачи</h3>
+        <p>{{ object.description|linebreaks }}</p>
     </div>
     <!-- Блок: слева карточки игроков с увеличенными аватарками, кнопкой удалить -->
     <!-- справа четырёхугольник силы -->
@@ -54,7 +51,9 @@
                             </div>
                         </div>
                         <a href="{% url 'team_user-remove' object.id user.id %}"
-                           class="delete-btn">🗑️ Удалить</a>
+                           class="delete-btn">
+                            <i class="fa-solid fa-trash"></i> Удалить
+                        </a>
                     </div>
                 {% endfor %}
             </div>
@@ -62,7 +61,7 @@
         <!-- ПРАВАЯ КОЛОНКА: ЧЕТЫРЁХУГОЛЬНИК СИЛЫ -->
         <div class="power-side">
             <div class="power-hex-container">
-                <div class="power-title">ЧЕТЫРЁХУГОЛЬНИК СИЛЫ</div>
+                <div class="power-title">Силы команды</div>
                 <!-- Радар SVG 4 угла -->
                 <div class="radar-quad">
                     <svg class="radar-svg"
@@ -98,7 +97,7 @@
                         <text x="130" y="220" class="stat-value-text">{{ object.disc_s }}</text>
                         <text x="40" y="140" class="stat-value-text">{{ object.disc_c }}</text>
                         <!-- Центральный кружок -->
-                        <circle cx="{{ object.find_center.x }}" cy="{{ object.find_center.y }}" r="8" fill="#ffb347" stroke="#0a1424" stroke-width="2"></circle>
+                        <circle cx="{{ object.find_center.x }}" cy="{{ object.find_center.y }}" r="8" fill="#ff3495" stroke="#ff3495" stroke-width="2"></circle>
                     </svg>
                 </div>
                 <div class="legend-stats">
@@ -166,7 +165,9 @@
                             </td>
                             <td>
                                 {% if user not in object.users.all %}
-                                    <a class="add-btn" href="{% url 'team_user-add' object.id user.id %}">➕ Добавить</a>
+                                    <a class="add-btn" href="{% url 'team_user-add' object.id user.id %}">
+                                        <i class="fa-solid fa-plus"></i> Добавить
+                                    </a>
                                 {% endif %}
                             </td>
                         </tr>
