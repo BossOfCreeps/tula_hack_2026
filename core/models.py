@@ -18,6 +18,12 @@ class Team(models.Model):
     disc_s = models.IntegerField("Стабильность")
     disc_c = models.IntegerField("Соответствие")
 
+    motype_in = models.IntegerField("Инструментальный")
+    motype_pr = models.IntegerField("Профессиональный")
+    motype_pa = models.IntegerField("Патриотический")
+    motype_ho = models.IntegerField("Хозяйский")
+    motype_lu = models.IntegerField("Люмпенизированный")
+
     class Meta:
         verbose_name = "Команда"
         verbose_name_plural = "Команды"

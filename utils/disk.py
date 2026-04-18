@@ -24,7 +24,7 @@ RISKY_PAIRS: dict[Tuple[str, str], str] = {
 DISK_LIST = ["D", "I", "S", "C"]
 
 
-def check_disk_compatibility(task_requirements: dict[str, int], participants: list[dict[str, int]]) -> dict[str, Any]:
+def check_disk_compatibility(participants: list[dict[str, int]]) -> dict[str, Any]:
     """
     Проверяет совместимость команды по DISK.
     """

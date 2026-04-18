@@ -24,7 +24,6 @@ class TeamDetailView(DetailView):
         return super().get_context_data(**kwargs) | {
             "all_users": User.objects.all(),
             "disk_compatibility": check_disk_compatibility(
-                {"D": obj.disc_d, "I": obj.disc_i, "S": obj.disc_s, "C": obj.disc_c},
                 [{"user": u, "D": u.disc_d, "I": u.disc_i, "S": u.disc_s, "C": u.disc_c} for u in obj.users.all()],
             ),
         }
@@ -32,7 +31,20 @@ class TeamDetailView(DetailView):
 
 class TeamCreateView(CreateView):
     model = Team
-    fields = ["description", "disc_d", "disc_i", "disc_s", "disc_c"]
+    fields = [
+        "disc_d",
+        "disc_i",
+        "disc_s",
+        "disc_c",
+        #
+        "description",
+        #
+        "motype_in",
+        "motype_pr",
+        "motype_pa",
+        "motype_ho",
+        "motype_lu",
+    ]
 
     def form_valid(self, form):
         instance = form.save(commit=False)

@@ -5,12 +5,18 @@ from django.db import models
 class User(AbstractUser):
     role = models.TextField(blank=True, null=True, help_text="User's role in the team")
 
-    disc_d = models.IntegerField("Доминирование", null=True, help_text="Score for Dominance dimension (0-100)")
+    disc_d = models.IntegerField(
+        "Доминирование", null=True, help_text="Score for Dominance dimension (0-100)", default=0
+    )
     disc_i = models.IntegerField("Влияние", help_text="Score for Influence dimension (0-100)", default=0)
     disc_s = models.IntegerField("Стабильность", help_text="Score for Steadiness dimension (0-100)", default=0)
     disc_c = models.IntegerField("Соответствие", help_text="Score for Compliance dimension (0-100)", default=0)
 
-    motivational_profile = models.TextField(blank=True, null=True, help_text="User's motivational profile description")
+    motype_in = models.IntegerField("Инструментальный", default=0)
+    motype_pr = models.IntegerField("Профессиональный", default=0)
+    motype_pa = models.IntegerField("Патриотический", default=0)
+    motype_ho = models.IntegerField("Хозяйский", default=0)
+    motype_lu = models.IntegerField("Люмпенизированный", default=0)
 
     age = models.TextField(blank=True, null=True, help_text="Age or generation (e.g., Gen Z, Millennial, etc.)")
 
