@@ -124,6 +124,91 @@
             </div>
         </div>
     </div>
+    <hr>
+    <!-- БЛОКИ НЕСОВМЕСТИМОСТИ -->
+    <div class="incompatibility-section">
+        <div class="incompatibility-grid">
+            <!-- КРИТИЧЕСКИЕ НЕСОВМЕСТИМОСТИ -->
+            <div class="incompatibility-card">
+                <div class="incompatibility-header critical-header">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <h3>Критические несовместимости</h3>
+                </div>
+                <div class="incompatibility-list">
+                    {% if disk_compatibility.conflicts %}
+                        {% for item in disk_compatibility.conflicts %}
+                            <div class="incompatibility-item">
+                                <div class="users-comparison">
+                                    <div class="user-compact">
+                                        <img class="user-compact-avatar"
+                                             src="{% if item.user1.image %}{{ item.user1.image.url }}{% else %}/static/default.png{% endif %}"
+                                             alt="{{ item.user1.get_full_name }}">
+                                        <span class="user-compact-name">{{ item.user1.get_full_name }}</span>
+                                    </div>
+                                    <span class="vs-icon">vs</span>
+                                    <div class="user-compact">
+                                        <img class="user-compact-avatar"
+                                             src="{% if item.user2.image %}{{ item.user2.image.url }}{% else %}/static/default.png{% endif %}"
+                                             alt="{{ item.user2.get_full_name }}">
+                                        <span class="user-compact-name">{{ item.user2.get_full_name }}</span>
+                                    </div>
+                                </div>
+                                <div class="incompatibility-reason">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    {{ item.reason }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-list-message">
+                            <i class="fa-regular fa-circle-check"></i>
+                            <p>Критических несовместимостей не обнаружено</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- РИСКОВАННЫЕ НЕСОВМЕСТИМОСТИ -->
+            <div class="incompatibility-card">
+                <div class="incompatibility-header risk-header">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <h3>Рискованные сочетания</h3>
+                </div>
+                <div class="incompatibility-list">
+                    {% if disk_compatibility.warnings %}
+                        {% for item in disk_compatibility.warnings %}
+                            <div class="incompatibility-item">
+                                <div class="users-comparison">
+                                    <div class="user-compact">
+                                        <img class="user-compact-avatar"
+                                             src="{% if item.user1.image %}{{ item.user1.image.url }}{% else %}/static/default.png{% endif %}"
+                                             alt="{{ item.user1.get_full_name }}">
+                                        <span class="user-compact-name">{{ item.user1.get_full_name }}</span>
+                                    </div>
+                                    <span class="vs-icon">vs</span>
+                                    <div class="user-compact">
+                                        <img class="user-compact-avatar"
+                                             src="{% if item.user2.image %}{{ item.user2.image.url }}{% else %}/static/default.png{% endif %}"
+                                             alt="{{ item.user2.get_full_name }}">
+                                        <span class="user-compact-name">{{ item.user2.get_full_name }}</span>
+                                    </div>
+                                </div>
+                                <div class="incompatibility-reason risk-reason">
+                                    <i class="fa-solid fa-clock "></i>
+                                    {{ item.reason }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-list-message">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                            <p>Рискованных сочетаний не обнаружено</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- AI КНОПКИ -->
     <div class="div-ai">
         <form method="post" action="{% url 'team-run_ai' object.pk %}">
             {% csrf_token %}
@@ -134,9 +219,11 @@
             </button>
         </form>
         <a class="ai-button-alt" href="{% url 'team-ai_reviews' object.id 0 %}">
+            <i class="fa-regular fa-file-lines"></i>
             <span>Посмотреть AI отчеты ({{ object.reviews.count }})</span>
         </a>
     </div>
+    <hr>
     <!-- ТАБЛИЦА с увеличенными аватарками и кнопками "добавить" -->
     <div class="table-section">
         <div class="table-title">Все пользователи</div>

@@ -130,7 +130,10 @@
                         <div class="assessment-item">
                             <a href="{% url 'team-ai_reviews' review.team_id review.id %}">
                                 <div class="assessment-item-title">
-                                    <span>{{ review.created_at }}</span>
+                                    <span>
+                                        {% if review == object %}<i class="fa-solid fa-arrow-right"></i>{% endif %}
+                                        {{ review.created_at }}
+                                    </span>
                                 </div>
                                 <div class="assessment-item-preview">{{ review.team_fit }}</div>
                             </a>

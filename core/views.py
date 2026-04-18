@@ -1,8 +1,10 @@
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import DetailView, View, ListView, CreateView, TemplateView
 
 from core.models import Team, AIReviews
 from users.models import User
+from utils.disk import check_disk_compatibility
 from utils.gpt import call_ai
 from utils.prompts import MAIN_PROMPT
 
@@ -17,7 +19,15 @@ class TeamDetailView(DetailView):
         return Team.objects.prefetch_related("users").filter(created_by=self.request.user)
 
     def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs) | {"all_users": User.objects.all()}
+        obj: Team = self.get_object()
+
+        return super().get_context_data(**kwargs) | {
+            "all_users": User.objects.all(),
+            "disk_compatibility": check_disk_compatibility(
+                {"D": obj.disc_d, "I": obj.disc_i, "S": obj.disc_s, "C": obj.disc_c},
+                [{"user": u, "D": u.disc_d, "I": u.disc_i, "S": u.disc_s, "C": u.disc_c} for u in obj.users.all()],
+            ),
+        }
 
 
 class TeamCreateView(CreateView):
@@ -33,13 +43,13 @@ class TeamCreateView(CreateView):
 class TeamUserAddView(View):
     def get(self, request, team_id, user_id):
         Team.objects.get(id=team_id).users.add(User.objects.get(id=user_id))
-        return HttpResponseRedirect(f"/team/{team_id}/")
+        return HttpResponseRedirect(reverse("team-detail", kwargs={"pk": team_id}))
 
 
 class TeamUserRemoveView(View):
     def get(self, request, team_id, user_id):
         Team.objects.get(id=team_id).users.remove(User.objects.get(id=user_id))
-        return HttpResponseRedirect(f"/team/{team_id}/")
+        return HttpResponseRedirect(reverse("team-detail", kwargs={"pk": team_id}))
 
 
 class TeamRunAIView(View):
@@ -74,7 +84,7 @@ class TeamRunAIView(View):
                 for p in tma["tension_points"]:
                     team_members_analysis.append(f'{prefix} с "{p["with"]}".\nПроблема: {p["reason"]}')
 
-        AIReviews.objects.create(
+        ai_review = AIReviews.objects.create(
             team=team,
             #
             strengths="\n\n".join(result["swot_analysis"]["strengths"]) or "-",
@@ -89,7 +99,7 @@ class TeamRunAIView(View):
             team_members_analysis="\n\n".join(team_members_analysis) or "-",
         )
 
-        return HttpResponseRedirect(f"/team/{pk}/")
+        return HttpResponseRedirect(reverse("team-ai_reviews", kwargs={"team_id": team.id, "pk": ai_review.id}))
 
 
 class TeamAIReviewView(TemplateView):
