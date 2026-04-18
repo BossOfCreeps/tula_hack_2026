@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
-from django.views.generic import DetailView, View, ListView, CreateView
+from django.views.generic import DetailView, View, ListView, CreateView, TemplateView
 
-from core.models import Team
+from core.models import Team, AIReviews
 from users.models import User
 from utils.gpt import call_ai
 from utils.prompts import MAIN_PROMPT
@@ -42,7 +42,7 @@ class TeamUserRemoveView(View):
         return HttpResponseRedirect(f"/team/{team_id}/")
 
 
-class TeamAICallView(View):
+class TeamRunAIView(View):
     def post(self, request, pk):
         team = Team.objects.get(id=pk)
 
@@ -65,4 +65,41 @@ class TeamAICallView(View):
             users=str(users),
         )
 
-        print(call_ai(prompt))
+        result = call_ai(prompt)
+
+        team_members_analysis = []
+        for tma in result["team_members_analysis"]:
+            if tma["tension_points"]:
+                prefix = f'"{tma["name"]} ({tma["role"]})"'
+                for p in tma["tension_points"]:
+                    team_members_analysis.append(f'{prefix} с "{p["with"]}".\nПроблема: {p["reason"]}')
+
+        AIReviews.objects.create(
+            team=team,
+            #
+            strengths="\n\n".join(result["swot_analysis"]["strengths"]) or "-",
+            weaknesses="\n\n".join(result["swot_analysis"]["weaknesses"]) or "-",
+            opportunities="\n\n".join(result["swot_analysis"]["opportunities"]) or "-",
+            threats="\n\n".join(result["swot_analysis"]["threats"]) or "-",
+            #
+            team_fit=result["conclusion"]["team_fit"],
+            key_issues="\n\n".join(result["conclusion"]["key_issues"]) or "-",
+            recommendations="\n\n".join(result["conclusion"]["recommendations"]) or "-",
+            #
+            team_members_analysis="\n\n".join(team_members_analysis) or "-",
+        )
+
+        return HttpResponseRedirect(f"/team/{pk}/")
+
+
+class TeamAIReviewView(TemplateView):
+    template_name = "core/aireview_list.html"
+
+    def get_context_data(self, *, object_list=..., **kwargs):
+        qs = AIReviews.objects.filter(team_id=self.kwargs["team_id"])
+        if self.kwargs["pk"] > 0:
+            object_ = qs.get(pk=self.kwargs["pk"])
+        else:
+            object_ = qs.first()
+
+        return super().get_context_data(object_list=object_list, **kwargs) | {"reviews": qs, "object": object_}

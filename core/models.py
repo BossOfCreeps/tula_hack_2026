@@ -85,3 +85,24 @@ class Team(models.Model):
 
     def get_absolute_url(self):
         return reverse("team-detail", kwargs={"pk": self.id})
+
+
+class AIReviews(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="reviews")
+
+    strengths = models.TextField()
+    weaknesses = models.TextField()
+    opportunities = models.TextField()
+    threats = models.TextField()
+
+    team_fit = models.TextField()
+    key_issues = models.TextField()
+    recommendations = models.TextField()
+
+    team_members_analysis = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Отзыв ИИ"
+        verbose_name_plural = "Отзывы ИИ"

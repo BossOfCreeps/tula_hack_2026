@@ -946,6 +946,7 @@ a {
     font-size: 1.3rem;
     font-weight: 800;
 }
+
 /* -------------------------------------------------------------------------
    Стили для формы (адаптированы под белую тему)
    Палитра: белый фон, черный текст, розовый (#FF3495) для акцентов
@@ -1189,6 +1190,7 @@ select {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1359,12 +1361,13 @@ select {
         transform: rotate(360deg);
     }
 }
+
 /* ========= АДАПТИВ ========= */
 @media (max-width: 880px) {
     .two-columns {
         flex-direction: column;
     }
-    
+
     .radar-quad {
         width: 350px;
         height: 220px;
@@ -1376,35 +1379,36 @@ select {
     .teams-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .teams-title {
         font-size: 1.6rem;
     }
-    
+
     .header .container {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .nav {
         justify-content: center;
         flex-wrap: wrap;
         gap: 16px;
     }
-    
+
     .section-title {
         font-size: 1.5rem;
     }
-    
+
     .players-grid {
         grid-template-columns: 1fr;
     }
 }
 
-.dataTables_length{
+.dataTables_length {
     padding-bottom: 20px;
 }
-table.dataTable{
+
+table.dataTable {
     margin-bottom: 20px;
 }
 
@@ -1421,8 +1425,13 @@ table.dataTable{
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .modal-content {
@@ -1440,6 +1449,7 @@ table.dataTable{
         transform: translateY(-50px);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;
@@ -1605,13 +1615,15 @@ table.dataTable{
     }
 }
 
-.motivationBlock{
+.motivationBlock {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.dataTables_length select{
+
+.dataTables_length select {
     width: 80px;
 }
+
 /* ========= КНОПКА ЗАПУСТИТЬ AI ========= */
 .div-ai {
     display: flex;
@@ -1723,5 +1735,429 @@ table.dataTable{
     .ai-button,
     .ai-button-alt {
         justify-content: center;
+    }
+}
+
+
+/* ========= СТРАНИЦА ОЦЕНКИ КОМАНДЫ ========= */
+.assessment-wrapper {
+    display: flex;
+    gap: 32px;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 30px var(--grid-margin);
+}
+
+/* ОСНОВНОЙ КОНТЕНТ (слева) */
+.assessment-main {
+    flex: 3;
+    min-width: 0;
+}
+
+/* БОКОВАЯ ПАНЕЛЬ (справа) */
+.assessment-sidebar {
+    flex: 1;
+    min-width: 280px;
+    max-width: 360px;
+}
+
+/* Заголовок страницы */
+.assessment-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.assessment-title {
+    font-size: var(--font-size-h1);
+    font-weight: 800;
+    color: var(--color-black);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.assessment-title i {
+    color: var(--color-magenta);
+}
+
+.assessment-subtitle {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1rem;
+    margin-top: 12px;
+}
+
+.team-info-badge {
+    display: inline-block;
+    background: rgba(255, 52, 149, 0.1);
+    padding: 8px 20px;
+    border-radius: 100vw;
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.team-info-badge i {
+    margin-right: 8px;
+    color: var(--color-magenta);
+}
+
+/* Сетка блоков */
+.assessment-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Общие стили для блоков */
+.assessment-block {
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: var(--transition-default);
+    margin-bottom: 20px;
+}
+
+.assessment-block:hover {
+    border-color: var(--color-magenta);
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+}
+
+.block-header {
+    background: rgba(0, 0, 0, 0.02);
+    padding: 20px 28px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.block-header h2 {
+    font-size: var(--font-size-h2);
+    font-weight: 700;
+    color: var(--color-black);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.block-header h2 i {
+    color: var(--color-magenta);
+    font-size: 1.4rem;
+}
+
+.block-body {
+    padding: 28px;
+}
+
+/* ========= SWOT ТАБЛИЦА 2x2 ========= */
+.swot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.swot-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: var(--transition-default);
+    border: 1px solid rgba(255, 52, 149, 0.5);
+}
+
+
+
+.swot-header {
+    padding: 16px 20px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.swot-header i {
+    font-size: 1.3rem;
+}
+
+.swot-content {
+    padding: 20px;
+    background: var(--color-white);
+    min-height: 180px;
+}
+
+.swot-content p {
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.swot-content.empty {
+    color: rgba(0, 0, 0, 0.3);
+    font-style: italic;
+}
+
+/* Цвета для SWOT секций */
+.swot-strengths .swot-header {
+    background: rgba(167, 252, 0, 0.15);
+    color: #2d5a00;
+    border-left: 4px solid var(--color-lime);
+}
+
+.swot-weaknesses .swot-header {
+    background: rgba(255, 52, 149, 0.1);
+    color: #b81268;
+    border-left: 4px solid var(--color-magenta);
+}
+
+.swot-opportunities .swot-header {
+    background: rgba(0, 191, 255, 0.1);
+    color: #006699;
+    border-left: 4px solid var(--color-electric-blue);
+}
+
+.swot-threats .swot-header {
+    background: rgba(0, 0, 255, 0.08);
+    color: #000099;
+    border-left: 4px solid var(--color-blue);
+}
+
+/* ========= АНАЛИЗ КОМАНДЫ ========= */
+.team-analysis-content {
+    line-height: 1.7;
+}
+
+.team-analysis-content p {
+    margin-bottom: 16px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.team-analysis-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Список участников */
+.members-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.member-tag {
+    background: #F5F5F7;
+    padding: 6px 14px;
+    border-radius: 100vw;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.member-tag i {
+    color: var(--color-magenta);
+    font-size: 0.8rem;
+}
+
+/* ========= ИТОГОВЫЙ БЛОК ========= */
+.result-section {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.result-item {
+    background: #F5F5F7;
+    border-radius: 20px;
+    padding: 20px 24px;
+    transition: var(--transition-default);
+}
+
+.result-item:hover {
+    background: rgba(255, 52, 149, 0.05);
+}
+
+.result-item h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.result-item h3 i {
+    color: var(--color-magenta);
+}
+
+.result-item p {
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+/* Team Fit - специальный стиль */
+.team-fit {
+    background: var(--color-white);
+    border: 1px solid rgba(255, 52, 149, 0.3);
+}
+
+.team-fit h3 i {
+    color: var(--color-magenta);
+}
+
+.fit-score {
+    display: inline-block;
+    background: var(--color-magenta);
+    color: var(--color-white);
+    padding: 4px 12px;
+    border-radius: 100vw;
+    font-size: 0.8rem;
+    margin-left: 12px;
+}
+
+/* ========= БОКОВАЯ ПАНЕЛЬ - СПИСОК ОЦЕНОК ========= */
+.sidebar-card {
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar-header {
+    background: rgba(0, 0, 0, 0.02);
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-header h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-black);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-header h3 i {
+    color: var(--color-magenta);
+}
+
+.create-assessment-btn {
+    width: 100%;
+    margin-top: 12px;
+    background: var(--color-magenta);
+    color: var(--color-white);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 100vw;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-default);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.create-assessment-btn:hover {
+    background: var(--color-black);
+    transform: translateY(-2px);
+}
+
+.assessments-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.assessment-item {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: var(--transition-default);
+}
+
+.assessment-item:hover {
+    background: rgba(255, 52, 149, 0.05);
+}
+
+.assessment-item.active {
+    background: rgba(255, 52, 149, 0.1);
+    border-left: 3px solid var(--color-magenta);
+}
+
+.assessment-item-title {
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assessment-item-date {
+    font-size: 0.7rem;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.assessment-item-badge {
+    font-size: 0.7rem;
+    background: rgba(255, 52, 149, 0.15);
+    padding: 2px 8px;
+    border-radius: 100vw;
+    color: var(--color-magenta);
+}
+
+.assessment-item-preview {
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.empty-list {
+    padding: 40px 20px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.empty-list i {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+/* Адаптив */
+@media (max-width: 1024px) {
+    .assessment-wrapper {
+        flex-direction: column;
+    }
+
+    .assessment-sidebar {
+        max-width: 100%;
+        order: -1;
+    }
+
+    .sidebar-card {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .swot-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .block-header {
+        padding: 16px 20px;
+    }
+
+    .block-body {
+        padding: 20px;
+    }
+
+    .result-item {
+        padding: 16px;
     }
 }

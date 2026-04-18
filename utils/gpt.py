@@ -9,7 +9,7 @@ def _pretty(text):
 
 
 def call_ai(prompt):
-    a = """```json
+    _ = """```json
 {
   "swot_analysis": {
     "strengths": [
@@ -82,8 +82,7 @@ def call_ai(prompt):
   ]
 }
 ```"""
-    return _pretty(a)
 
     with GigaChat(credentials=settings.GIGACHAT_AUTH_KEY, verify_ssl_certs=False) as giga:
         response = giga.chat(prompt)
-        return _pretty(response.choices[0].message)
+        return _pretty(response.choices[0].message.content)

@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% block head %}
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script type="text/javascript"
+            charset="utf8"
+            src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+{% endblock head %}
+{% block main %}
+    <div class="assessment-wrapper">
+        <!-- ОСНОВНОЙ КОНТЕНТ -->
+        <div class="assessment-main">
+            <!-- БЛОК SWOT (таблица 2x2) -->
+            <div class="assessment-block">
+                <div class="block-header">
+                    <h2>
+                        <i class="fa-solid fa-chart-gantt"></i>
+                        SWOT-анализ
+                    </h2>
+                </div>
+                <div class="block-body">
+                    <div class="swot-grid">
+                        <!-- Strengths -->
+                        <div class="swot-card swot-strengths">
+                            <div class="swot-header">
+                                <i class="fa-solid fa-plus-circle"></i>
+                                Сильные стороны
+                            </div>
+                            <div class="swot-content">
+                                <p>{{ object.strengths|linebreaksbr }}</p>
+                            </div>
+                        </div>
+                        <!-- Weaknesses -->
+                        <div class="swot-card swot-weaknesses">
+                            <div class="swot-header">
+                                <i class="fa-solid fa-minus-circle"></i>
+                                Слабые стороны
+                            </div>
+                            <div class="swot-content">
+                                <p>{{ object.weaknesses|linebreaksbr }}</p>
+                            </div>
+                        </div>
+                        <!-- Opportunities -->
+                        <div class="swot-card swot-opportunities">
+                            <div class="swot-header">
+                                <i class="fa-solid fa-arrow-trend-up"></i>
+                                Возможности
+                            </div>
+                            <div class="swot-content">
+                                <p>{{ object.opportunities|linebreaksbr }}</p>
+                            </div>
+                        </div>
+                        <!-- Threats -->
+                        <div class="swot-card swot-threats">
+                            <div class="swot-header">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                Угрозы
+                            </div>
+                            <div class="swot-content">
+                                <p>{{ object.threats|linebreaksbr }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- БЛОК АНАЛИЗ КОМАНДЫ -->
+            <div class="assessment-block">
+                <div class="block-header">
+                    <h2>
+                        <i class="fa-solid fa-people-arrows"></i>
+                        Анализ команды
+                    </h2>
+                </div>
+                <div class="block-body">
+                    <div class="team-analysis-content">
+                        <p>{{ object.team_members_analysis|linebreaksbr }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- БЛОК ИТОГ -->
+            <div class="assessment-block">
+                <div class="block-header">
+                    <h2>
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        Итоговый анализ
+                    </h2>
+                </div>
+                <div class="block-body">
+                    <div class="result-section">
+                        <!-- Team Fit -->
+                        <div class="result-item team-fit">
+                            <h3>
+                                <i class="fa-solid fa-handshake"></i>
+                                Совместимость команды
+                            </h3>
+                            <p>{{ object.team_fit|linebreaksbr }}</p>
+                        </div>
+                        <!-- Key Issues -->
+                        <div class="result-item">
+                            <h3>
+                                <i class="fa-solid fa-bug"></i>
+                                Ключевые проблемы
+                            </h3>
+                            <p>{{ object.key_issues|linebreaksbr }}</p>
+                        </div>
+                        <!-- Recommendations -->
+                        <div class="result-item">
+                            <h3>
+                                <i class="fa-solid fa-lightbulb"></i>
+                                Рекомендации
+                            </h3>
+                            <p>{{ object.recommendations|linebreaksbr }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- БОКОВАЯ ПАНЕЛЬ - СПИСОК ОЦЕНОК -->
+        <div class="assessment-sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-header">
+                    <h3>
+                        <i class="fa-solid fa-list-check"></i>
+                        Список оценок
+                    </h3>
+                </div>
+                <div class="assessments-list" id="assessmentsList">
+                    {% for review in reviews %}
+                        <div class="assessment-item">
+                            <a href="{% url 'team-ai_reviews' review.team_id review.id %}">
+                                <div class="assessment-item-title">
+                                    <span>{{ review.created_at }}</span>
+                                </div>
+                                <div class="assessment-item-preview">{{ review.team_fit }}</div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+    /* Дополнительные стили для модального окна */
+    .modal-large {
+        max-width: 800px;
+        width: 90%;
+    }
+
+    .form-section {
+        margin-bottom: 32px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .form-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .form-section-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--color-black);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-section-title::before {
+        content: '';
+        width: 4px;
+        height: 20px;
+        background: var(--color-magenta);
+        border-radius: 2px;
+    }
+
+    .form-row-2cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .form-textarea {
+        width: 100%;
+        padding: 12px 16px;
+        background: var(--color-white);
+        border: 2px solid rgba(0, 0, 0, 0.15);
+        border-radius: 16px;
+        color: var(--color-black);
+        font-size: 0.95rem;
+        font-family: inherit;
+        transition: var(--transition-default);
+        resize: vertical;
+    }
+
+    .form-textarea:focus {
+        outline: none;
+        border-color: var(--color-magenta);
+        box-shadow: 0 0 0 3px rgba(255, 52, 149, 0.1);
+    }
+
+    @media (max-width: 600px) {
+        .form-row-2cols {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+    }
+    </style>
+{% endblock main %}
+{% block scripts %}
+{% endblock scripts %}

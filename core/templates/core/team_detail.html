@@ -125,7 +125,7 @@
         </div>
     </div>
     <div class="div-ai">
-        <form method="post" action="{% url 'team-ai' object.pk %}">
+        <form method="post" action="{% url 'team-run_ai' object.pk %}">
             {% csrf_token %}
             <button class="ai-button">
                 <i class="fa-solid fa-robot"></i>
@@ -133,8 +133,8 @@
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
         </form>
-        <a class="ai-button-alt">
-            <span>Посмотреть AI отчеты ()</span>
+        <a class="ai-button-alt" href="{% url 'team-ai_reviews' object.id 0 %}">
+            <span>Посмотреть AI отчеты ({{ object.reviews.count }})</span>
         </a>
     </div>
     <!-- ТАБЛИЦА с увеличенными аватарками и кнопками "добавить" -->
