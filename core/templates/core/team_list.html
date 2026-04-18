@@ -48,7 +48,9 @@
                 </a>
             {% empty %}
                 <div class="empty-state">
-                    <div class="empty-icon">🏗️</div>
+                    <div class="empty-icon">
+                        <i class="fa-solid fa-users-slash"></i>
+                    </div>
                     <h3>Пока нет команд</h3>
                     <p>Создайте первую команду и начните собирать свой состав</p>
                     {% if user.is_authenticated %}

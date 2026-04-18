@@ -151,7 +151,18 @@
                                     <img src="{% if user.image %}{{ user.image.url }}{% else %}/static/default.png{% endif %}"
                                          class="user-avatar-medium"
                                          alt="{{ user.get_full_name }}" />
-                                    <span>{{ user.get_full_name }}</span>
+                                    <span class="user-name-clickable"
+                                          data-name="{{ user.get_full_name }}"
+                                          data-role="{{ user.role|default:'-' }}"
+                                          data-age="{{ user.age|default:'-' }}"
+                                          data-motivational_profile="{{ user.motivational_profile|default:'-'|linebreaks }}"
+                                          data-email="{{ user.email|default:'-' }}"
+                                          data-disc-d="{{ user.disc_d }}"
+                                          data-disc-i="{{ user.disc_i }}"
+                                          data-disc-s="{{ user.disc_s }}"
+                                          data-disc-c="{{ user.disc_c }}"
+                                          data-total="{{ user.total_disc_score }}"
+                                          data-avatar="{% if user.image %}{{ user.image.url }}{% else %}/static/default.png{% endif %}">{{ user.get_full_name }}</span>
                                 </div>
                             </td>
                             <td>{{ user.role }}</td>
@@ -176,6 +187,59 @@
             </table>
         </div>
     </div>
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalUserName"></h2>
+                <span class="modal-close"><i class="fa-solid fa-xmark"></i></span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-avatar">
+                    <img id="modalAvatar" src="" alt="Аватар">
+                </div>
+                <div class="modal-info">
+                    <div class="info-row">
+                        <span class="info-label">Роль:</span>
+                        <span id="modalRole" class="info-value"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Возраст:</span>
+                        <span id="modalAge" class="info-value"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Email:</span>
+                        <span id="modalEmail" class="info-value"></span>
+                    </div>
+                </div>
+                <div class="motivationBlock" id="modelMotivationalProfile"></div>
+                <div class="modal-stats">
+                    <h3>DISC профиль</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-card-value" id="modalDiscD">0</div>
+                            <div class="stat-card-label">Доминирование</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-value" id="modalDiscI">0</div>
+                            <div class="stat-card-label">Влияние</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-value" id="modalDiscS">0</div>
+                            <div class="stat-card-label">Стабильность</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-value" id="modalDiscC">0</div>
+                            <div class="stat-card-label">Соответствие</div>
+                        </div>
+                    </div>
+                    <div class="modal-total">
+                        <span>Общий рейтинг:</span>
+                        <strong id="modalTotal">0</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock main %}
 {% block scripts %}
     <script>
@@ -185,6 +249,83 @@
                 url: 'https://cdn.datatables.net/plug-ins/1.13.4/i18n/ru.json'
             }
         });
+    });
+
+    // Получаем модальное окно
+    var modal = document.getElementById('userModal');
+    var closeBtn = document.getElementsByClassName('modal-close')[0];
+
+    // Функция открытия модалки
+    function openUserModal(userData) {
+        // Заполняем данные
+        document.getElementById('modalUserName').textContent = userData.name;
+        document.getElementById('modalRole').textContent = userData.role;
+        document.getElementById('modalAge').textContent = userData.age || '—';
+        document.getElementById('modelMotivationalProfile').innerHTML = userData.motivational_profile || '—';
+        document.getElementById('modalEmail').textContent = userData.email || '—';
+        document.getElementById('modalDiscD').textContent = userData.disc_d;
+        document.getElementById('modalDiscI').textContent = userData.disc_i;
+        document.getElementById('modalDiscS').textContent = userData.disc_s;
+        document.getElementById('modalDiscC').textContent = userData.disc_c;
+        document.getElementById('modalTotal').textContent = userData.total;
+
+        // Устанавливаем аватар
+        var avatarImg = document.getElementById('modalAvatar');
+        if (userData.avatar && userData.avatar !== '') {
+            avatarImg.src = userData.avatar;
+        } else {
+            avatarImg.src = '/static/default.png';
+        }
+
+        // Показываем модалку
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Закрытие модалки
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    closeBtn.onclick = closeModal;
+
+    // Закрытие по клику вне модалки
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
+    // Закрытие по ESC
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && modal.style.display === 'block') {
+            closeModal();
+        }
+    });
+
+    // Обработчик клика по имени пользователя в таблице
+    // Используем делегирование событий, так как таблица динамическая
+    $('#myTable tbody').on('click', '.user-name-clickable', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Получаем данные из data-атрибутов
+        var userData = {
+            name: $(this).data('name'),
+            role: $(this).data('role'),
+            age: $(this).data('age'),
+            motivational_profile: $(this).data('motivational_profile'),
+            email: $(this).data('email'),
+            disc_d: $(this).data('disc-d'),
+            disc_i: $(this).data('disc-i'),
+            disc_s: $(this).data('disc-s'),
+            disc_c: $(this).data('disc-c'),
+            total: $(this).data('total'),
+            avatar: $(this).data('avatar')
+        };
+
+        openUserModal(userData);
     });
     </script>
 {% endblock scripts %}
