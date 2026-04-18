@@ -8,14 +8,13 @@
             src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 {% endblock head %}
 {% block main %}
-    <!-- ТЕКСТОВЫЙ БЛОК С ОПИСАНИЕМ ЗАДАЧИ (добавлен в начало) -->
+    <!-- ТЕКСТОВЫЙ БЛОК С ОПИСАНИЕМ ЗАДАЧИ -->
     <div class="task-description">
         <h1>{{ object.description|linebreaks }}</h1>
     </div>
-    <!-- Блок: слева карточки игроков с увеличенными аватарками, кнопкой удалить -->
-    <!-- справа четырёхугольник силы -->
+    <!-- Блок: слева карточки игроков, справа четырёхугольник силы + круговая диаграмма -->
     <div class="two-columns">
-        <!-- ЛЕВАЯ ЧАСТЬ: карточки игроков с аватарками -->
+        <!-- ЛЕВАЯ ЧАСТЬ: карточки игроков -->
         <div class="players-section">
             <div class="players-grid">
                 {% for user in object.users.all %}
@@ -61,7 +60,6 @@
         <div class="power-side">
             <div class="power-hex-container">
                 <div class="power-title">Силы команды</div>
-                <!-- Радар SVG 4 угла -->
                 <div class="radar-quad">
                     <svg class="radar-svg"
                          viewBox="0 0 260 260"
@@ -75,27 +73,20 @@
                         </feMerge>
                         </filter>
                         </defs>
-                        <!-- Фоновые оси (крест) и сетка -->
                         <line x1="130" y1="10" x2="130" y2="250" class="axis-line"></line>
                         <line x1="10" y1="130" x2="250" y2="130" class="axis-line"></line>
-                        <!-- Ромб/рамка фонового четырехугольника (max уровень 100) -->
                         <polygon points="130,20 240,130 130,240 20,130" class="polygon-bg"></polygon>
-                        <!-- внутренние линии (шкала 50%) -->
                         <polygon points="130,75 175,130 130,185 85,130" fill="none" stroke="#ffcd7e40" stroke-width="1" stroke-dasharray="2 3"></polygon>
                         <polygon points="130,47.5 202.5,130 130,212.5 57.5,130" fill="none" stroke="#ffcd7e20" stroke-width="1"></polygon>
-                        <!-- Заливка рейтинга -->
                         <polygon points="{{ object.calc_polygon.disc_d }} {{ object.calc_polygon.disc_i }} {{ object.calc_polygon.disc_s }} {{ object.calc_polygon.disc_c }}" class="polygon-fill"></polygon>
-                        <!-- Подписи углов -->
                         <text x="130" y="10" class="stat-label-radial">Доминирование</text>
                         <text x="270" y="120" class="stat-label-radial">Влияние</text>
                         <text x="130" y="250" class="stat-label-radial">Стабильность</text>
                         <text x="-20" y="120" class="stat-label-radial">Соответствие</text>
-                        <!-- Цифры рядом с вершинами -->
                         <text x="130" y="40" class="stat-value-text">{{ object.disc_d }}</text>
                         <text x="220" y="140" class="stat-value-text">{{ object.disc_i }}</text>
                         <text x="130" y="220" class="stat-value-text">{{ object.disc_s }}</text>
                         <text x="40" y="140" class="stat-value-text">{{ object.disc_c }}</text>
-                        <!-- Центральный кружок -->
                         <circle cx="{{ object.find_center.x }}" cy="{{ object.find_center.y }}" r="8" fill="#ff3495" stroke="#ff3495" stroke-width="2"></circle>
                     </svg>
                 </div>
@@ -120,6 +111,32 @@
                 <div class="total-power-radial">
                     <span>Итог:</span>
                     <div class="total-number-radial">{{ object.dics_match }}%</div>
+                </div>
+            </div>
+            <!-- Круговая диаграмма (5 параметров) -->
+            <div class="team-pie-detail">
+                <div class="power-title">
+                    <span>Распределение ролей</span>
+                </div>
+                <div class="pie-content">
+                    <div class="pie-container-detail">
+                        <div class="pie-chart-detail"
+                             style="background: conic-gradient( {% for role in object.motypes_circle %} {{ role.color }} {{ role.start_percent }}% {{ role.percent }}%{% if not forloop.last %}, {% endif %} {% endfor %} )">
+                        </div>
+                        <div class="pie-inner-detail">
+                            <span class="pie-total-detail">100</span>
+                            <span class="pie-label-detail">%</span>
+                        </div>
+                    </div>
+                    <div class="pie-legend-detail">
+                        {% for role in object.motypes %}
+                            <div class="pie-legend-item-detail">
+                                <span class="pie-legend-color-detail" style="background: {{ role.color }};"></span>
+                                <span class="pie-legend-label-detail">{{ role.name }}</span>
+                                <span class="pie-legend-percent-detail">{{ role.percent }}%</span>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -193,7 +210,7 @@
                                     </div>
                                 </div>
                                 <div class="incompatibility-reason risk-reason">
-                                    <i class="fa-solid fa-clock "></i>
+                                    <i class="fa-solid fa-clock"></i>
                                     {{ item.reason }}
                                 </div>
                             </div>
@@ -350,13 +367,10 @@
         });
     });
 
-    // Получаем модальное окно
     var modal = document.getElementById('userModal');
     var closeBtn = document.getElementsByClassName('modal-close')[0];
 
-    // Функция открытия модалки
     function openUserModal(userData) {
-        // Заполняем данные
         document.getElementById('modalUserName').textContent = userData.name;
         document.getElementById('modalRole').textContent = userData.role;
         document.getElementById('modalAge').textContent = userData.age || '—';
@@ -368,7 +382,6 @@
         document.getElementById('modalDiscC').textContent = userData.disc_c;
         document.getElementById('modalTotal').textContent = userData.total;
 
-        // Устанавливаем аватар
         var avatarImg = document.getElementById('modalAvatar');
         if (userData.avatar && userData.avatar !== '') {
             avatarImg.src = userData.avatar;
@@ -376,12 +389,10 @@
             avatarImg.src = '/static/default.png';
         }
 
-        // Показываем модалку
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
 
-    // Закрытие модалки
     function closeModal() {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
@@ -389,27 +400,22 @@
 
     closeBtn.onclick = closeModal;
 
-    // Закрытие по клику вне модалки
     window.onclick = function(event) {
         if (event.target == modal) {
             closeModal();
         }
     }
 
-    // Закрытие по ESC
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape' && modal.style.display === 'block') {
             closeModal();
         }
     });
 
-    // Обработчик клика по имени пользователя в таблице
-    // Используем делегирование событий, так как таблица динамическая
     $('#myTable tbody').on('click', '.user-name-clickable', function(e) {
         e.preventDefault();
         e.stopPropagation();
 
-        // Получаем данные из data-атрибутов
         var userData = {
             name: $(this).data('name'),
             role: $(this).data('role'),
