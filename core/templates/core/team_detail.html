@@ -10,8 +10,7 @@
 {% block main %}
     <!-- ТЕКСТОВЫЙ БЛОК С ОПИСАНИЕМ ЗАДАЧИ (добавлен в начало) -->
     <div class="task-description">
-        <h3>Описание задачи</h3>
-        <p>{{ object.description|linebreaks }}</p>
+        <h1>{{ object.description|linebreaks }}</h1>
     </div>
     <!-- Блок: слева карточки игроков с увеличенными аватарками, кнопкой удалить -->
     <!-- справа четырёхугольник силы -->
@@ -88,9 +87,9 @@
                         <polygon points="{{ object.calc_polygon.disc_d }} {{ object.calc_polygon.disc_i }} {{ object.calc_polygon.disc_s }} {{ object.calc_polygon.disc_c }}" class="polygon-fill"></polygon>
                         <!-- Подписи углов -->
                         <text x="130" y="10" class="stat-label-radial">Доминирование</text>
-                        <text x="210" y="120" class="stat-label-radial">Влияние</text>
+                        <text x="270" y="120" class="stat-label-radial">Влияние</text>
                         <text x="130" y="250" class="stat-label-radial">Стабильность</text>
-                        <text x="60" y="120" class="stat-label-radial">Соответствие</text>
+                        <text x="-20" y="120" class="stat-label-radial">Соответствие</text>
                         <!-- Цифры рядом с вершинами -->
                         <text x="130" y="40" class="stat-value-text">{{ object.disc_d }}</text>
                         <text x="220" y="140" class="stat-value-text">{{ object.disc_i }}</text>
@@ -120,10 +119,23 @@
                 </div>
                 <div class="total-power-radial">
                     <span>Итог:</span>
-                    <div class="total-number-radial">{{ object.dics_match }}</div>
+                    <div class="total-number-radial">{{ object.dics_match }}%</div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="div-ai">
+        <form method="post" action="{% url 'team-ai' object.pk %}">
+            {% csrf_token %}
+            <button class="ai-button">
+                <i class="fa-solid fa-robot"></i>
+                <span>Проверить команду при помощи AI</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </form>
+        <a class="ai-button-alt">
+            <span>Посмотреть AI отчеты ()</span>
+        </a>
     </div>
     <!-- ТАБЛИЦА с увеличенными аватарками и кнопками "добавить" -->
     <div class="table-section">
@@ -155,7 +167,7 @@
                                           data-name="{{ user.get_full_name }}"
                                           data-role="{{ user.role|default:'-' }}"
                                           data-age="{{ user.age|default:'-' }}"
-                                          data-motivational_profile="{{ user.motivational_profile|default:'-'|linebreaks }}"
+                                          data-motivational_profile="{{ user.motivational_profile|default:'-'|linebreaksbr }}"
                                           data-email="{{ user.email|default:'-' }}"
                                           data-disc-d="{{ user.disc_d }}"
                                           data-disc-i="{{ user.disc_i }}"
