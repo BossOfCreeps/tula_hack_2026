@@ -237,6 +237,39 @@
                 </div>
             </div>
         </div>
+        <!-- ТРЕТИЙ БЛОК: НЕПОДХОДЯЩИЕ ПОЛЬЗОВАТЕЛИ (на всю ширину) -->
+        <div class="incompatibility-fullwidth">
+            <div class="incompatibility-header unfit-header">
+                <i class="fa-solid fa-user-xmark"></i>
+                <h3>Неподходящие кандидаты (Тест Герчикова)</h3>
+            </div>
+            <div class="incompatibility-list-full">
+                {% if motype_employees %}
+                    {% for item in motype_employees %}
+                        <div class="incompatibility-item-full">
+                            <div class="user-full">
+                                <img class="user-full-avatar"
+                                     src="{% if item.user.image %}{{ item.user.image.url }}{% else %}/static/default.png{% endif %}"
+                                     alt="{{ item.user.get_full_name }}">
+                                <div class="user-full-info">
+                                    <span class="user-full-name">{{ item.user.get_full_name }}</span>
+                                    <span class="user-full-role">{{ item.user.role|default:"Без роли" }}</span>
+                                </div>
+                            </div>
+                            <div class="incompatibility-reason-full">
+                                <i class="fa-solid fa-ban"></i>
+                                {{ item.reason }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-list-message-full">
+                        <i class="fa-regular fa-smile"></i>
+                        <p>Все пользователи подходят для работы над задачей</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
     <!-- AI КНОПКИ -->
     <div class="div-ai">

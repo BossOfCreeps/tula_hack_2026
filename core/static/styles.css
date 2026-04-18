@@ -2974,3 +2974,140 @@ table.dataTable {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+/* Третий блок на всю ширину */
+.incompatibility-fullwidth {
+    margin-top: 24px;
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: var(--transition-default);
+}
+
+.incompatibility-fullwidth:hover {
+    border-color: var(--color-magenta);
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+}
+
+.unfit-header {
+    background: rgba(255, 52, 149, 0.08);
+    border-left: 4px solid var(--color-magenta);
+}
+
+.unfit-header i {
+    color: var(--color-magenta);
+}
+
+.incompatibility-list-full {
+    padding: 8px 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.incompatibility-item-full {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition-default);
+}
+
+.incompatibility-item-full:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.user-full {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 220px;
+    flex-shrink: 0;
+}
+
+.user-full-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-magenta);
+}
+
+.user-full-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.user-full-name {
+    font-weight: 700;
+    color: var(--color-black);
+    font-size: 0.95rem;
+}
+
+.user-full-role {
+    font-size: 0.7rem;
+    color: rgba(0, 0, 0, 0.5);
+    background: #F5F5F7;
+    padding: 2px 8px;
+    border-radius: 100vw;
+    display: inline-block;
+    width: fit-content;
+}
+
+.incompatibility-reason-full {
+    flex: 1;
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.7);
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.incompatibility-reason-full i {
+    color: var(--color-magenta);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.empty-list-message-full {
+    padding: 50px 20px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.empty-list-message-full i {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+    opacity: 0.5;
+}
+
+.empty-list-message-full p {
+    font-size: 0.9rem;
+}
+
+/* Адаптив для третьего блока */
+@media (max-width: 768px) {
+    .incompatibility-item-full {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .user-full {
+        width: 100%;
+    }
+
+    .incompatibility-reason-full {
+        width: 100%;
+        padding-left: 62px;
+    }
+}
+
+@media (max-width: 480px) {
+    .incompatibility-reason-full {
+        padding-left: 0;
+    }
+}

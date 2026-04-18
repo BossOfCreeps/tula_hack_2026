@@ -6,6 +6,7 @@ from core.models import Team, AIReviews
 from users.models import User
 from utils.disc import check_disk_compatibility
 from utils.gpt import call_ai
+from utils.motype import select_motype_employees, get_motype_map
 from utils.prompts import MAIN_PROMPT
 
 
@@ -26,6 +27,14 @@ class TeamDetailView(DetailView):
             "disk_compatibility": check_disk_compatibility(
                 [{"user": u, "D": u.disc_d, "I": u.disc_i, "S": u.disc_s, "C": u.disc_c} for u in obj.users.all()],
             ),
+            "motype_employees": [
+                {"user": me["name"], "reason": me["filter_reason"]}
+                for me in select_motype_employees(
+                    get_motype_map(obj),
+                    [{"id": u.id, "name": u, "profile": get_motype_map(u)} for u in obj.users.all()],
+                )
+                if not me["passed_filters"]
+            ],
         }
 
 

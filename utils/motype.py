@@ -1,5 +1,4 @@
 import math
-from pprint import pprint
 from typing import Dict, List, Tuple
 
 # Константы: названия типов
@@ -13,6 +12,16 @@ THRESHOLDS = {
     "team": {"required": ["PA"], "forbidden": ["IN"], "forbidden_threshold": 0.4},
     "risk": {"required": ["HO"], "forbidden": ["LU"], "forbidden_threshold": 0.2},
 }
+
+
+def get_motype_map(obj):
+    return {
+        "IN": obj.motype_in / 100,
+        "PR": obj.motype_pr / 100,
+        "PA": obj.motype_pa / 100,
+        "HO": obj.motype_ho / 100,
+        "LU": obj.motype_lu / 100,
+    }
 
 
 def cosine_similarity(vec_a: Dict[str, float], vec_b: Dict[str, float]) -> float:
@@ -138,20 +147,3 @@ def select_motype_employees(task_profile: Dict[str, float], employees: List[Dict
 
     # 5. Возвращаем топ-N (включая непрошедших фильтры в конце списка)
     return results
-
-
-# ========== ПРИМЕР ИСПОЛЬЗОВАНИЯ ==========
-if __name__ == "__main__":
-    # Профиль задачи
-    task = {"IN": 0.10, "PR": 0.30, "PA": 0.10, "HO": 0.45, "LU": 0.05}
-
-    # Сотрудники
-    employees = [
-        {"id": 1, "name": "Петров А.А.", "profile": {"IN": 0.10, "PR": 0.05, "PA": 0.10, "HO": 0.35, "LU": 0.40}},
-        {"id": 2, "name": "Сидоров Б.Б.", "profile": {"IN": 0.40, "PR": 0.20, "PA": 0.10, "HO": 0.10, "LU": 0.20}},
-        {"id": 3, "name": "Иванова В.В.", "profile": {"IN": 0.05, "PR": 0.15, "PA": 0.60, "HO": 0.10, "LU": 0.10}},
-    ]
-
-    # Выбираем лучших
-    best = select_motype_employees(task, employees)
-    pprint(best)
