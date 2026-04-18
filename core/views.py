@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.views.generic import DetailView, View, ListView
+from django.views.generic import DetailView, View, ListView, CreateView
 
 from core.models import Team
 from users.models import User
@@ -16,6 +16,16 @@ class TeamDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(**kwargs) | {"all_users": User.objects.all()}
+
+
+class TeamCreateView(CreateView):
+    model = Team
+    fields = ["description", "disc_d", "disc_i", "disc_s", "disc_c"]
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.created_by = self.request.user
+        return super().form_valid(form)
 
 
 class TeamUserAddView(View):

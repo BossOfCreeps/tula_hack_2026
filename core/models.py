@@ -1,6 +1,7 @@
 from functools import cached_property
 
 from django.db import models
+from django.urls import reverse
 
 from users.models import User
 
@@ -10,12 +11,12 @@ class Team(models.Model):
     created_by = models.ForeignKey(User, models.CASCADE, related_name="created_teams")
     created_at = models.DateTimeField(auto_now_add=True)
 
+    description = models.TextField("Описание")
+
     disc_d = models.IntegerField("Доминирование")
     disc_i = models.IntegerField("Влияние")
     disc_s = models.IntegerField("Стабильность")
     disc_c = models.IntegerField("Соответствие")
-
-    description = models.TextField(null=False)
 
     class Meta:
         verbose_name = "Команда"
@@ -81,3 +82,6 @@ class Team(models.Model):
         sum_x = sum(v[0] for v in vertices)
         sum_y = sum(v[1] for v in vertices)
         return {"x": int(sum_x / 4), "y": int(sum_y / 4)}
+
+    def get_absolute_url(self):
+        return reverse("team-detail", kwargs={"pk": self.id})

@@ -3,7 +3,7 @@
     <div class="teams-container">
         {% if user.is_authenticated and object_list %}
             <div class="create-team-fab">
-                <a href="#" class="btn-create-team">
+                <a href="{% url 'team-create' %}" class="btn-create-team">
                     <span class="plus">+</span> Создать команду
                 </a>
             </div>
@@ -51,7 +51,9 @@
                     <div class="empty-icon">🏗️</div>
                     <h3>Пока нет команд</h3>
                     <p>Создайте первую команду и начните собирать свой состав</p>
-                    {% if user.is_authenticated %}<a href="#" class="btn-create">Создать команду</a>{% endif %}
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'team-create' %}" class="btn-create">Создать команду</a>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
