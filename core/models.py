@@ -7,7 +7,7 @@ from users.models import User, Role
 
 
 class Team(models.Model):
-    users = models.ManyToManyField(User, related_name="team_as_member")
+    users = models.ManyToManyField(User, related_name="team_as_member", blank=True)
     created_by = models.ForeignKey(User, models.CASCADE, related_name="created_teams")
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -25,6 +25,9 @@ class Team(models.Model):
     motype_lu = models.IntegerField("Люмпенизированный")
 
     roles = models.ManyToManyField(Role, verbose_name="Роли")
+
+    def __str__(self):
+        return self.description
 
     class Meta:
         verbose_name = "Команда"

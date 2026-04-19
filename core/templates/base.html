@@ -7,7 +7,10 @@
         <meta name="keywords">
         <meta name="viewport"
               content="width=device-width, initial-scale=1.0, user-scalable=yes">
-        <title>Карточки</title>
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
         <script type="text/javascript"
                 charset="utf8"
                 src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -22,17 +25,10 @@
             <div class="container">
                 <div class="logo">
                     <h1>
-                        <a href="{% url "team-list" %}">ULTIMATE TEAM</a>
+                        <a href="{% url "team-list" %}">Team Builder</a>
                     </h1>
                 </div>
-                <div class="nav">
-                    <!--
-                    <a href="#">Главная</a>
-                    <a href="#">Игроки</a>
-                    <a href="#">Таблица лиги</a>
-                    <a href="#">Академия</a>
-                    -->
-                </div>
+                <div class="nav"></div>
             </div>
         </header>
         <main class="container">

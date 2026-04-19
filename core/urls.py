@@ -12,7 +12,7 @@ from core.views import (
 )
 
 urlpatterns = [
-    path("team/", TeamListView.as_view(), name="team-list"),
+    path("", TeamListView.as_view(), name="team-list"),
     path("team/<int:pk>/", TeamDetailView.as_view(), name="team-detail"),
     path("team/create", TeamCreateView.as_view(), name="team-create"),
     path("team_user/<int:team_id>/<int:user_id>/add", TeamUserAddView.as_view(), name="team_user-add"),

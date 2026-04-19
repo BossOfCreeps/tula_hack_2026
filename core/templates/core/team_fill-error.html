@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block title %}
+    Ошибка
+{% endblock title %}
 {% block main %}
     <div class="assessment-wrapper">
         <a href="{% url 'team-detail' team_id %}">
@@ -6,6 +9,6 @@
         </a>
     </div>
     <div class="assessment-wrapper">
-        <h1>Не удалось подобрать команду 😞</h1>
+        <h1>Не удалось подобрать команду без конфликтов 😞</h1>
     </div>
 {% endblock main %}
