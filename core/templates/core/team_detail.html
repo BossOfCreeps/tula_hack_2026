@@ -312,6 +312,14 @@
         </a>
     </div>
     <hr>
+    <div class="div-auto-team">
+        <form method="post" action="{% url 'team-fill' object.id %}">
+            {% csrf_token %}
+            <button class="auto-team-button">
+                <i class="fa-solid fa-wand-sparkles"></i>                <span>Собрать команду автоматически</span>
+            </button>
+        </form>
+    </div>
     <!-- ТАБЛИЦА с увеличенными аватарками и кнопками "добавить" -->
     <div class="table-section">
         <div class="table-title">Все пользователи</div>

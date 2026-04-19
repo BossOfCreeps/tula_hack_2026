@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block main %}
+    <div class="assessment-wrapper">
+        <a href="{% url 'team-detail' team_id %}">
+            <i class="fa-solid fa-arrow-left"></i> Назад к команде
+        </a>
+    </div>
+    <div class="assessment-wrapper">
+        <h1>Не удалось подобрать команду 😞</h1>
+    </div>
+{% endblock main %}

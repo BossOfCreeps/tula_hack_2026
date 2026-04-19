@@ -79,11 +79,12 @@ class Team(models.Model):
         return result
 
     @cached_property
+    def dics_dict(self):
+        return {"disc_d": self.disc_d, "disc_i": self.disc_i, "disc_s": self.disc_s, "disc_c": self.disc_c}
+
+    @cached_property
     def dics_match(self):
-        desired = {"disc_d": self.disc_d, "disc_i": self.disc_i, "disc_s": self.disc_s, "disc_c": self.disc_c}
-
-        data = [(self.users_disc[key] / value) if self.users_disc[key] < value else 1 for key, value in desired.items()]
-
+        data = [(self.users_disc[k] / v) if self.users_disc[k] < v else 1 for k, v in self.dics_dict.items()]
         return round(sum(data) / 4 * 100, 2)
 
     @cached_property

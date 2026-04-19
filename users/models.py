@@ -91,17 +91,25 @@ class User(AbstractUser):
             },
         ]
 
-    @property
-    def total_params(self):
-        r = {"disc_v": 0, "disc_k": "", "motype_v": 0, "motype_k": ""}
+    @cached_property
+    def disc_result(self):
+        name, val = "", 0
         for k, v in self.disc_profile.items():
-            if (v or 0) > r["disc_v"]:
-                r["disc_k"] = k
-                r["disc_v"] = v
+            if (v or 0) > val:
+                name = k
+                val = v
 
+        return name
+
+    @cached_property
+    def motype_result(self):
+        name, val = "", 0
         for d in self.motypes:
-            if (d["percent"] or 0) > r["motype_v"]:
-                r["motype_v"] = d["percent"]
-                r["motype_k"] = d["name"]
+            if (d["percent"] or 0) > val:
+                val = d["percent"]
+                name = d["name"]
+        return name
 
-        return f"{r['disc_k'][:1].upper()} | {r['motype_k'][:2].upper()}"
+    @cached_property
+    def total_params(self):
+        return f"{self.disc_result[:1].upper()} | {self.motype_result[:2].upper()}"

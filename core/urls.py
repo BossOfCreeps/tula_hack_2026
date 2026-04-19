@@ -8,6 +8,7 @@ from core.views import (
     TeamCreateView,
     TeamRunAIView,
     TeamAIReviewView,
+    TeamFillView,
 )
 
 urlpatterns = [
@@ -16,6 +17,7 @@ urlpatterns = [
     path("team/create", TeamCreateView.as_view(), name="team-create"),
     path("team_user/<int:team_id>/<int:user_id>/add", TeamUserAddView.as_view(), name="team_user-add"),
     path("team_user/<int:team_id>/<int:user_id>/remove", TeamUserRemoveView.as_view(), name="team_user-remove"),
+    path("team/<int:pk>/fill", TeamFillView.as_view(), name="team-fill"),
     path("team/<int:pk>/run_ai", TeamRunAIView.as_view(), name="team-run_ai"),
     path("team/<int:team_id>/ai_reviews/<int:pk>", TeamAIReviewView.as_view(), name="team-ai_reviews"),
 ]

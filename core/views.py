@@ -1,4 +1,7 @@
+from collections import defaultdict
+
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import DetailView, View, ListView, CreateView, TemplateView
 
@@ -6,6 +9,7 @@ from core.models import Team, AIReviews
 from users.models import User
 from utils.disc import check_disk_compatibility
 from utils.gpt import call_ai
+from utils.lib import select_team
 from utils.motype import select_motype_employees, get_motype_map
 from utils.prompts import MAIN_PROMPT
 
@@ -62,20 +66,57 @@ class TeamCreateView(CreateView):
 
 
 class TeamUserAddView(View):
+    model = Team
+
     def get(self, request, team_id, user_id):
-        Team.objects.get(id=team_id).users.add(User.objects.get(id=user_id))
+        self.model.objects.get(id=team_id).users.add(User.objects.get(id=user_id))
         return HttpResponseRedirect(reverse("team-detail", kwargs={"pk": team_id}))
 
 
 class TeamUserRemoveView(View):
+    model = Team
+
     def get(self, request, team_id, user_id):
-        Team.objects.get(id=team_id).users.remove(User.objects.get(id=user_id))
+        self.model.objects.get(id=team_id).users.remove(User.objects.get(id=user_id))
         return HttpResponseRedirect(reverse("team-detail", kwargs={"pk": team_id}))
 
 
-class TeamRunAIView(View):
+class TeamFillView(View):
+    model = Team
+
     def post(self, request, pk):
-        team = Team.objects.get(id=pk)
+        team: Team = self.model.objects.get(id=pk)
+
+        users_dict = defaultdict(list)
+        for u in User.objects.filter(role__in=team.roles.all()):
+            users_dict[u.role].append(u)
+
+        team_users = select_team(
+            {
+                "disk_allowed": [k.replace("disc_", "").upper() for k, v in team.dics_dict.items() if v > 5],
+                "gerchikov_allowed": [m["name"].lower() for m in team.motypes if m["percent"] > 20],
+            },
+            {
+                r: [{"name": u, "disk": u.disc_result[:1].upper(), "gerchikov": u.motype_result.lower()} for u in users]
+                for r, users in users_dict.items()
+            },
+        )
+
+        if not team_users or True:
+            return render(request, "core/team_fill-error.html", {"team_id": team.id})
+
+        team.users.clear()
+        for _, d in team_users:
+            team.users.add(d["name"])
+
+        return HttpResponseRedirect(reverse("team-detail", kwargs={"pk": team.id}))
+
+
+class TeamRunAIView(View):
+    model = Team
+
+    def post(self, request, pk):
+        team = self.model.objects.get(id=pk)
 
         users = [
             {
