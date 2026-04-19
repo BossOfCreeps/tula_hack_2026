@@ -31,6 +31,7 @@ TEAM BUILDER
 * Загрузить зависимости из requirements.txt
 * Сделать копию файла .env.example -> .env
 * Заполните переменные окружения (ключи GIGACHAT можно получить https://developers.sber.ru/)
+* Сделать миграцию `python manager.py migrate`
 * Запустить `python manager.py runserver`
 * Создать пользователя `python manage createsuperuser`
 * Авторизоваться в админке http://localhost:8000/admin/
