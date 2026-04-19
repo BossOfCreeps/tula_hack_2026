@@ -17,7 +17,7 @@ class TeamListView(ListView):
 
 class TeamDetailView(DetailView):
     def get_queryset(self):
-        return Team.objects.prefetch_related("users__role").filter(created_by=self.request.user)
+        return Team.objects.prefetch_related("users__role", "roles").filter(created_by=self.request.user)
 
     def get_context_data(self, **kwargs):
         obj: Team = self.get_object()
@@ -35,6 +35,7 @@ class TeamDetailView(DetailView):
                 )
                 if not me["passed_filters"]
             ],
+            "team_roles": [u.role for u in obj.users.all()],
         }
 
 

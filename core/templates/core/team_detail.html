@@ -152,6 +152,31 @@
                     </div>
                 </div>
             </div>
+            <!-- Блок РОЛИ с галочками -->
+            <div class="team-roles-block">
+                <p class="power-title">
+                    <i class="fa-solid fa-tags"></i>
+                    Роли в команде
+                </p>
+                <div class="roles-list">
+                    {% for role in object.roles.all %}
+                        <div class="role-item {% if role in team_roles %}role-present{% else %}role-missing{% endif %}">
+                            <div class="role-info">
+                                <span class="role-name">{{ role.name }}</span>
+                            </div>
+                            <div class="role-status">
+                                {% if role in team_roles %}
+                                    <i class="fa-solid fa-circle-check" title="Роль присутствует в команде"></i>
+                                    <span class="status-text present">Есть</span>
+                                {% else %}
+                                    <i class="fa-regular fa-circle-xmark" title="Роль отсутствует в команде"></i>
+                                    <span class="status-text missing">Нет</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
     <hr>

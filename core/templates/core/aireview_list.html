@@ -9,6 +9,11 @@
 {% endblock head %}
 {% block main %}
     <div class="assessment-wrapper">
+        <a href="{% url 'team-detail' object.team_id %}">
+            <i class="fa-solid fa-arrow-left"></i> Назад к команде
+        </a>
+    </div>
+    <div class="assessment-wrapper">
         <!-- ОСНОВНОЙ КОНТЕНТ -->
         <div class="assessment-main">
             <!-- БЛОК SWOT (таблица 2x2) -->

@@ -3111,3 +3111,148 @@ table.dataTable {
         padding-left: 0;
     }
 }
+/* Блок ролей */
+.team-roles-block {
+    margin-top: 20px;
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: var(--transition-default);
+}
+
+.team-roles-block:hover {
+    border-color: var(--color-magenta);
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+}
+
+.power-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--color-black);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.power-title i {
+    color: var(--color-magenta);
+}
+
+.roles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.role-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #F5F5F7;
+    border-radius: 12px;
+    transition: var(--transition-default);
+    cursor: pointer;
+}
+
+
+.role-present {
+    border-left: 3px solid var(--color-lime);
+    background: rgba(167, 252, 0, 0.08);
+}
+
+.role-missing {
+    border-left: 3px solid var(--color-magenta);
+    background: rgba(255, 52, 149, 0.05);
+}
+
+.role-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.role-name {
+    font-weight: 700;
+    color: var(--color-black);
+    font-size: 0.9rem;
+}
+
+.role-description {
+    font-size: 0.7rem;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.role-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.role-status i {
+    font-size: 1.1rem;
+}
+
+.role-present i {
+    color: var(--color-lime);
+}
+
+.role-missing i {
+    color: var(--color-magenta);
+}
+
+.status-text {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100vw;
+}
+
+.status-text.present {
+    background: rgba(167, 252, 0, 0.2);
+    color: #2d5a00;
+}
+
+.status-text.missing {
+    background: rgba(255, 52, 149, 0.15);
+    color: #b81268;
+}
+
+.empty-roles {
+    text-align: center;
+    padding: 30px 20px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.empty-roles i {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    display: block;
+    opacity: 0.5;
+}
+
+.empty-roles p {
+    font-size: 0.8rem;
+}
+
+/* Адаптив */
+@media (max-width: 480px) {
+    .role-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .role-status {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
