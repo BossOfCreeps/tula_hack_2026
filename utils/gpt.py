@@ -67,8 +67,6 @@ def _pretty(text):
 
 
 def call_ai(prompt):
-    return example
-
-    with GigaChat(credentials=settings.GIGACHAT_AUTH_KEY, verify_ssl_certs=False) as giga:
+    with GigaChat(credentials=settings.GIGACHAT_AUTH_KEY, verify_ssl_certs=False, model="GigaChat-2-Max") as giga:
         response = giga.chat(prompt)
         return _pretty(response.choices[0].message.content)

@@ -2346,12 +2346,6 @@ table.dataTable {
     color: var(--color-black);
 }
 
-.ai-button-alt:hover {
-    border-color: var(--color-magenta);
-    color: var(--color-magenta);
-    transform: translateY(-2px);
-}
-
 /* Адаптив */
 @media (max-width: 900px) {
     .incompatibility-grid {

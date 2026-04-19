@@ -103,7 +103,7 @@ class TeamFillView(View):
             },
         )
 
-        if not team_users or True:
+        if not team_users:
             return render(request, "core/team_fill-error.html", {"team_id": team.id})
 
         team.users.clear()

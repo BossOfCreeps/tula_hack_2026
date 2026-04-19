@@ -34,8 +34,6 @@ def select_team(task: Dict[str, List[str]], roles: Dict[str, List[Dict[str, Any]
             if user.get("disk") in disk_allowed and user.get("gerchikov") in gerchikov_allowed:
                 valid_users.append(user)
         if not valid_users:
-            print(111)
-            # Нет ни одного подходящего пользователя в этой роли – решение невозможно
             return None
         filtered_roles[role] = valid_users
 
