@@ -342,18 +342,7 @@
                                     <img src="{% if user.image %}{{ user.image.url }}{% else %}/static/default.png{% endif %}"
                                          class="user-avatar-medium"
                                          alt="{{ user.get_full_name }}" />
-                                    <span class="user-name-clickable"
-                                          data-name="{{ user.get_full_name }}"
-                                          data-role="{{ user.role|default:'-' }}"
-                                          data-age="{{ user.age|default:'-' }}"
-                                          data-motivational_profile="{{ user.motivational_profile|default:'-'|linebreaksbr }}"
-                                          data-email="{{ user.email|default:'-' }}"
-                                          data-disc-d="{{ user.disc_d }}"
-                                          data-disc-i="{{ user.disc_i }}"
-                                          data-disc-s="{{ user.disc_s }}"
-                                          data-disc-c="{{ user.disc_c }}"
-                                          data-total="{{ user.total_params }}"
-                                          data-avatar="{% if user.image %}{{ user.image.url }}{% else %}/static/default.png{% endif %}">{{ user.get_full_name }}</span>
+                                    <span class="user-name-clickable">{{ user.get_full_name }}</span>
                                 </div>
                             </td>
                             <td>{{ user.role }}</td>

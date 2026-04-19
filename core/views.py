@@ -84,7 +84,8 @@ class TeamRunAIView(View):
                 "age": user.age,
                 "disc_metrics": f"Доминирование: {user.disc_d}, Влияние: {user.disc_i}, "
                 f"Стабильность: {user.disc_s}, Соответствие: {user.disc_c}",
-                "motivational_profile": user.motivational_profile,
+                "motype": f"инструментальный: {user.motype_in}%, профессиональный: {user.motype_pr}%, патриотический: "
+                f"{user.motype_pa}%, хозяйский: {user.motype_ho}%, люмпенизированный: {user.motype_lu}%",
             }
             for user in team.users.all()
         ]
@@ -93,6 +94,9 @@ class TeamRunAIView(View):
             description=team.description,
             disc=f"Доминирование: {team.disc_d}, Влияние: {team.disc_i}, "
             f"Стабильность: {team.disc_s}, Соответствие: {team.disc_c}",
+            motype=f"инструментальный: {team.motype_in}%, профессиональный: {team.motype_pr}%,"
+            f"патриотический: {team.motype_pa}%, хозяйский: {team.motype_ho}%, люмпенизированный: {team.motype_lu}%",
+            roles="\n".join([r.name for r in team.roles.all()]),
             users=str(users),
         )
 
