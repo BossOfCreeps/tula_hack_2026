@@ -9,6 +9,7 @@ from core.views import (
     TeamRunAIView,
     TeamAIReviewView,
     TeamFillView,
+    DiskDetailView,
 )
 
 urlpatterns = [
@@ -20,4 +21,5 @@ urlpatterns = [
     path("team/<int:pk>/fill", TeamFillView.as_view(), name="team-fill"),
     path("team/<int:pk>/run_ai", TeamRunAIView.as_view(), name="team-run_ai"),
     path("team/<int:team_id>/ai_reviews/<int:pk>", TeamAIReviewView.as_view(), name="team-ai_reviews"),
+    path("disk/<int:pk>/", DiskDetailView.as_view(), name="disk-detail"),
 ]

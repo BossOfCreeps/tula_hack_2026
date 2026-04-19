@@ -136,7 +136,7 @@
             </div>
             <!-- Круговая диаграмма (5 параметров) -->
             <div class="team-pie-detail">
-                <p class="power-title">Распределение ролей</p>
+                <p class="power-title">Мотивации</p>
                 <div class="pie-content">
                     <div class="pie-container-detail">
                         <div class="pie-chart-detail"
@@ -157,10 +157,7 @@
             </div>
             <!-- Блок РОЛИ с галочками -->
             <div class="team-roles-block">
-                <p class="power-title">
-                    <i class="fa-solid fa-tags"></i>
-                    Роли в команде
-                </p>
+                <p class="power-title">Роли</p>
                 <div class="roles-list">
                     {% for role in object.roles.all %}
                         <div class="role-item {% if role in team_roles %}role-present{% else %}role-missing{% endif %}">
@@ -213,7 +210,7 @@
                                 </div>
                                 <div class="incompatibility-reason">
                                     <i class="fa-solid fa-triangle-exclamation"></i>
-                                    {{ item.reason }}
+                                    <a href="{% url 'disk-detail' item.reason.1 %}" target="_blank">{{ item.reason.0 }}</a>
                                 </div>
                             </div>
                         {% endfor %}
@@ -252,7 +249,7 @@
                                 </div>
                                 <div class="incompatibility-reason risk-reason">
                                     <i class="fa-solid fa-clock"></i>
-                                    {{ item.reason }}
+                                    <a href="{% url 'disk-detail' item.reason.1 %}" target="_blank">{{ item.reason.0 }}</a>
                                 </div>
                             </div>
                         {% endfor %}

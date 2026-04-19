@@ -8,6 +8,7 @@ from django.views.generic import DetailView, View, ListView, CreateView, Templat
 from core.models import Team, AIReviews
 from users.models import User
 from utils.disc import check_disk_compatibility
+from utils.disk_advises import DISK_ADVISES
 from utils.gpt import call_ai
 from utils.lib import select_team
 from utils.motype import select_motype_employees, get_motype_map
@@ -179,3 +180,10 @@ class TeamAIReviewView(TemplateView):
             object_ = qs.first()
 
         return super().get_context_data(object_list=object_list, **kwargs) | {"reviews": qs, "object": object_}
+
+
+class DiskDetailView(TemplateView):
+    template_name = "core/disk_advise.html"
+
+    def get_context_data(self, *args, **kwargs):
+        return super().get_context_data(**kwargs) | {"disk_advise": DISK_ADVISES[kwargs["pk"]]}
